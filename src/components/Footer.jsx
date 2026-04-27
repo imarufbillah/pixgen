@@ -61,9 +61,9 @@ export default function Footer() {
               Quick Links
             </h3>
             <div className="flex flex-col gap-3">
-              {navLinks.map((link) => (
+              {navLinks.map((link, index) => (
                 <Link
-                  key={link.href}
+                  key={index}
                   href={link.href}
                   className="text-slate-400 hover:text-white transition-colors duration-300 text-sm"
                 >
