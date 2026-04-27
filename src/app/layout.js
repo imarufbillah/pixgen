@@ -16,10 +16,10 @@ const dmSans = DM_Sans({
 });
 
 export const metadata = {
-  metadataBase: new URL('https://pixgen.app'),
+  metadataBase: new URL("https://pixgen.app"),
   title: {
     default: "PixGen - AI Image Generation Gallery | Explore AI Art",
-    template: "%s | PixGen"
+    template: "%s | PixGen",
   },
   description:
     "Explore thousands of stunning AI-generated artworks, curated by style, mood, and model. Discover cyberpunk, fantasy, abstract, and photorealistic AI art from Stable Diffusion, Midjourney, and DALL-E.",
@@ -37,7 +37,7 @@ export const metadata = {
     "cyberpunk art",
     "fantasy art",
     "abstract art",
-    "AI art community"
+    "AI art community",
   ],
   authors: [{ name: "PixGen Team" }],
   creator: "PixGen",
@@ -94,22 +94,24 @@ export default function RootLayout({ children }) {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "PixGen",
-    description: "AI Image Generation Gallery - Explore stunning AI-generated artworks",
+    description:
+      "AI Image Generation Gallery - Explore stunning AI-generated artworks",
     url: "https://pixgen.app",
     potentialAction: {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: "https://pixgen.app/photos?q={search_term_string}"
+        urlTemplate: "https://pixgen.app/photos?q={search_term_string}",
       },
-      "query-input": "required name=search_term_string"
-    }
+      "query-input": "required name=search_term_string",
+    },
   };
 
   return (
     <html
       lang="en"
       className={`${syne.variable} ${dmSans.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <head>
         <link rel="canonical" href="https://pixgen.app" />

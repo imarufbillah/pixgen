@@ -116,6 +116,7 @@ export default function PhotoDetails({ params }) {
                 src={image.imageUrl}
                 alt={`${image.title} - ${image.category} AI art generated with ${image.model}`}
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
                 priority
               />

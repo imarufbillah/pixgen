@@ -59,13 +59,15 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-radial from-violet-900/20 via-[#080b10] to-cyan-900/20" />
 
         {/* Floating Images */}
-        <div className="absolute inset-0 overflow-hidden opacity-20">
+        <div className="absolute inset-0 overflow-hidden opacity-20" aria-hidden="true">
           <div className="absolute top-20 left-10 w-64 h-48 rounded-2xl overflow-hidden blur-sm float-1">
             <Image
               src="https://picsum.photos/seed/float1/400/300"
               alt=""
               fill
+              sizes="256px"
               className="object-cover"
+              priority
             />
           </div>
           <div className="absolute top-40 right-20 w-72 h-56 rounded-2xl overflow-hidden blur-sm float-2">
@@ -73,6 +75,7 @@ export default function Home() {
               src="https://picsum.photos/seed/float2/400/300"
               alt=""
               fill
+              sizes="288px"
               className="object-cover"
             />
           </div>
@@ -81,6 +84,7 @@ export default function Home() {
               src="https://picsum.photos/seed/float3/400/300"
               alt=""
               fill
+              sizes="224px"
               className="object-cover"
             />
           </div>
@@ -89,6 +93,7 @@ export default function Home() {
               src="https://picsum.photos/seed/float4/400/300"
               alt=""
               fill
+              sizes="256px"
               className="object-cover"
             />
           </div>
