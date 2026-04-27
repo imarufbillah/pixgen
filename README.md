@@ -42,6 +42,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the app.
 ## 🎨 Design System
 
 ### Color Palette
+
 ```css
 Background: #080b10
 Surface: #0f1318
@@ -51,6 +52,7 @@ Muted: #64748b
 ```
 
 ### Typography
+
 - **Syne** - Headings and display text
 - **DM Sans** - Body and UI text
 
@@ -82,6 +84,7 @@ See [PROJECT_OVERVIEW.md](./PROJECT_OVERVIEW.md) for detailed documentation.
 ## 📸 Mock Data
 
 Includes 12 hardcoded AI-generated image entries with:
+
 - Titles, categories, and prompts
 - Model information and metadata
 - Placeholder images from Picsum
@@ -89,6 +92,7 @@ Includes 12 hardcoded AI-generated image entries with:
 ## 🔧 Customization
 
 All components are modular and easy to customize:
+
 - Update colors in `globals.css`
 - Modify mock data in `data/images.js`
 - Adjust component styles individually

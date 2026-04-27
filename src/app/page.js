@@ -16,7 +16,7 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden grain-texture">
         {/* Gradient Background */}
         <div className="absolute inset-0 bg-gradient-radial from-violet-900/20 via-[#080b10] to-cyan-900/20" />
-        
+
         {/* Floating Images */}
         <div className="absolute inset-0 overflow-hidden opacity-20">
           <div className="absolute top-20 left-10 w-64 h-48 rounded-2xl overflow-hidden blur-sm float-1">
@@ -60,15 +60,16 @@ export default function Home() {
             <span>Powered by AI</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 sm:mb-6 font-[family-name:var(--font-syne)]">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 sm:mb-6 font-syne">
             <div className="text-white mb-2">Create. Imagine.</div>
-            <div className="bg-gradient-to-r from-violet-600 to-cyan-500 bg-clip-text text-transparent">
+            <div className="bg-linear-to-r from-violet-600 to-cyan-500 bg-clip-text text-transparent">
               Generate.
             </div>
           </h1>
 
           <p className="text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed px-4">
-            Explore thousands of stunning AI-generated artworks, curated by style, mood, and model.
+            Explore thousands of stunning AI-generated artworks, curated by
+            style, mood, and model.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-4">
@@ -84,7 +85,7 @@ export default function Home() {
         </div>
 
         {/* Bottom Fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#080b10] to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-[#080b10] to-transparent" />
       </section>
 
       {/* Top Generations Section */}
@@ -120,38 +121,41 @@ export default function Home() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-8 sm:mt-12">
           <div className="group p-6 sm:p-8 bg-[#0f1318] rounded-2xl border border-white/10 hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/20">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-linear-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
               <Zap className="text-white" size={24} />
             </div>
-            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 font-[family-name:var(--font-syne)]">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 font-syne">
               Lightning Fast
             </h3>
             <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
-              Browse thousands of AI-generated images with blazing-fast load times and smooth interactions.
+              Browse thousands of AI-generated images with blazing-fast load
+              times and smooth interactions.
             </p>
           </div>
 
           <div className="group p-6 sm:p-8 bg-[#0f1318] rounded-2xl border border-white/10 hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/20">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-linear-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
               <Palette className="text-white" size={24} />
             </div>
-            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 font-[family-name:var(--font-syne)]">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 font-syne">
               Diverse Styles
             </h3>
             <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
-              From cyberpunk to fantasy, abstract to photorealistic - discover art across every imaginable style.
+              From cyberpunk to fantasy, abstract to photorealistic - discover
+              art across every imaginable style.
             </p>
           </div>
 
           <div className="group p-6 sm:p-8 bg-[#0f1318] rounded-2xl border border-white/10 hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/20">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-linear-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
               <TrendingUp className="text-white" size={24} />
             </div>
-            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 font-[family-name:var(--font-syne)]">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 font-syne">
               Top Models
             </h3>
             <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
-              Images generated by the latest AI models including Stable Diffusion XL, Midjourney, and DALL-E 3.
+              Images generated by the latest AI models including Stable
+              Diffusion XL, Midjourney, and DALL-E 3.
             </p>
           </div>
         </div>

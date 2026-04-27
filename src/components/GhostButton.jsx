@@ -1,7 +1,12 @@
-export default function GhostButton({ children, className = "", variant = "default", ...props }) {
+export default function GhostButton({
+  children,
+  className = "",
+  variant = "default",
+  ...props
+}) {
   const variantStyles = {
     default: "border-violet-600 text-white hover:bg-violet-600/10",
-    danger: "border-red-500 text-red-500 hover:bg-red-500/10"
+    danger: "border-red-500 text-red-500 hover:bg-red-500/10",
   };
 
   return (

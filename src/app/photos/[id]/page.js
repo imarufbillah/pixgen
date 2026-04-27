@@ -15,7 +15,7 @@ export default function PhotoDetails({ params }) {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
           {/* Left Column - Image */}
-          <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-violet-500/10">
+          <div className="relative aspect-4/3 rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-violet-500/10">
             <Image
               src={image.imageUrl}
               alt={image.title}
@@ -35,7 +35,7 @@ export default function PhotoDetails({ params }) {
             </div>
 
             {/* Title */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white font-[family-name:var(--font-syne)]">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white font-syne">
               {image.title}
             </h1>
 
@@ -53,11 +53,7 @@ export default function PhotoDetails({ params }) {
 
             {/* Meta Grid */}
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              <MetaItem
-                icon={Cpu}
-                label="Model"
-                value={image.model}
-              />
+              <MetaItem icon={Cpu} label="Model" value={image.model} />
               <MetaItem
                 icon={Maximize2}
                 label="Resolution"
@@ -76,10 +72,10 @@ export default function PhotoDetails({ params }) {
               <MetaItem
                 icon={Calendar}
                 label="Created"
-                value={new Date(image.createdAt).toLocaleDateString('en-US', { 
-                  month: 'short', 
-                  day: 'numeric', 
-                  year: 'numeric' 
+                value={new Date(image.createdAt).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
                 })}
               />
             </div>

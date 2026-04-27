@@ -1,10 +1,14 @@
-export default function InputField({ label, type = "text", placeholder, className = "", ...props }) {
+export default function InputField({
+  label,
+  type = "text",
+  placeholder,
+  className = "",
+  ...props
+}) {
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
       {label && (
-        <label className="text-sm font-medium text-slate-300">
-          {label}
-        </label>
+        <label className="text-sm font-medium text-slate-300">{label}</label>
       )}
       <input
         type={type}

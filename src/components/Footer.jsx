@@ -7,7 +7,7 @@ export default function Footer() {
     { icon: FaXTwitter, href: "#", label: "Twitter" },
     { icon: FaInstagram, href: "#", label: "Instagram" },
     { icon: FaGithub, href: "#", label: "GitHub" },
-    { icon: FaDiscord, href: "#", label: "Discord" }
+    { icon: FaDiscord, href: "#", label: "Discord" },
   ];
 
   const navLinks = [
@@ -15,7 +15,7 @@ export default function Footer() {
     { href: "/photos", label: "All Photos" },
     { href: "/profile", label: "Profile" },
     { href: "#", label: "About" },
-    { href: "#", label: "Privacy Policy" }
+    { href: "#", label: "Privacy Policy" },
   ];
 
   return (
@@ -25,17 +25,22 @@ export default function Footer() {
           {/* Column 1: Logo & Social */}
           <div className="flex flex-col gap-6">
             <Link href="/" className="flex items-center gap-2 group">
-              <Sparkles className="text-violet-400 group-hover:text-cyan-400 transition-colors duration-300" size={24} />
-              <span className="text-xl md:text-2xl font-bold font-[family-name:var(--font-syne)]">
+              <Sparkles
+                className="text-violet-400 group-hover:text-cyan-400 transition-colors duration-300"
+                size={24}
+              />
+              <span className="text-xl md:text-2xl font-bold font-syne">
                 <span className="text-white">Pix</span>
-                <span className="bg-gradient-to-r from-violet-600 to-cyan-500 bg-clip-text text-transparent">Gen</span>
+                <span className="bg-linear-to-r from-violet-600 to-cyan-500 bg-clip-text text-transparent">
+                  Gen
+                </span>
               </span>
             </Link>
-            
+
             <p className="text-slate-400 text-sm italic">
-              "Where imagination becomes reality."
+              &quot;Where imagination becomes reality.&quot;
             </p>
-            
+
             <div className="flex items-center gap-3 flex-wrap">
               {socialLinks.map((social) => (
                 <a
@@ -52,7 +57,7 @@ export default function Footer() {
 
           {/* Column 2: Navigation Links */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-white font-bold text-lg font-[family-name:var(--font-syne)]">
+            <h3 className="text-white font-bold text-lg font-syne">
               Quick Links
             </h3>
             <div className="flex flex-col gap-3">
@@ -70,13 +75,13 @@ export default function Footer() {
 
           {/* Column 3: About */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-white font-bold text-lg font-[family-name:var(--font-syne)]">
+            <h3 className="text-white font-bold text-lg font-syne">
               About PixGen
             </h3>
             <p className="text-slate-400 text-sm leading-relaxed">
-              PixGen is a curated gallery of stunning AI-generated artwork. 
-              Explore thousands of images created by cutting-edge AI models, 
-              discover new styles, and get inspired by the intersection of 
+              PixGen is a curated gallery of stunning AI-generated artwork.
+              Explore thousands of images created by cutting-edge AI models,
+              discover new styles, and get inspired by the intersection of
               technology and creativity.
             </p>
           </div>

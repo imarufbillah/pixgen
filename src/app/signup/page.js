@@ -20,15 +20,17 @@ export default function SignUp() {
           {/* Logo */}
           <div className="flex items-center justify-center gap-2 mb-6 sm:mb-8">
             <Sparkles className="text-violet-400" size={28} />
-            <span className="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-syne)]">
+            <span className="text-2xl sm:text-3xl font-bold font-syne">
               <span className="text-white">Pix</span>
-              <span className="bg-gradient-to-r from-violet-600 to-cyan-500 bg-clip-text text-transparent">Gen</span>
+              <span className="bg-linear-to-r from-violet-600 to-cyan-500 bg-clip-text text-transparent">
+                Gen
+              </span>
             </span>
           </div>
 
           {/* Title */}
           <div className="text-center mb-6 sm:mb-8">
-            <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2 font-[family-name:var(--font-syne)]">
+            <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2 font-syne">
               Create Account
             </h1>
             <p className="text-sm sm:text-base text-slate-400">
@@ -38,11 +40,7 @@ export default function SignUp() {
 
           {/* Form */}
           <form className="flex flex-col gap-4 sm:gap-5">
-            <InputField
-              label="Full Name"
-              type="text"
-              placeholder="John Doe"
-            />
+            <InputField label="Full Name" type="text" placeholder="John Doe" />
 
             <InputField
               label="Email"
@@ -65,7 +63,7 @@ export default function SignUp() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 top-[38px] sm:top-[42px] text-slate-400 hover:text-white transition-colors"
+                className="absolute right-4 top-9.5 sm:top-10.5 text-slate-400 hover:text-white transition-colors"
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
@@ -79,7 +77,9 @@ export default function SignUp() {
           {/* Divider */}
           <div className="flex items-center gap-4 my-5 sm:my-6">
             <div className="flex-1 h-px bg-white/10" />
-            <span className="text-xs sm:text-sm text-slate-500">or continue with</span>
+            <span className="text-xs sm:text-sm text-slate-500">
+              or continue with
+            </span>
             <div className="flex-1 h-px bg-white/10" />
           </div>
 
@@ -111,7 +111,10 @@ export default function SignUp() {
           {/* Sign In Link */}
           <p className="text-center text-xs sm:text-sm text-slate-400 mt-5 sm:mt-6">
             Already have an account?{" "}
-            <Link href="/signin" className="text-violet-400 hover:text-cyan-400 font-semibold transition-colors">
+            <Link
+              href="/signin"
+              className="text-violet-400 hover:text-cyan-400 font-semibold transition-colors"
+            >
               Sign In
             </Link>
           </p>

@@ -17,7 +17,8 @@ const dmSans = DM_Sans({
 
 export const metadata = {
   title: "PixGen - AI Image Generation Gallery",
-  description: "Explore thousands of stunning AI-generated artworks, curated by style, mood, and model.",
+  description:
+    "Explore thousands of stunning AI-generated artworks, curated by style, mood, and model.",
 };
 
 export default function RootLayout({ children }) {
@@ -28,9 +29,7 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col bg-[#080b10] text-slate-100">
         <Navbar isLoggedIn={false} />
-        <main className="flex-1">
-          {children}
-        </main>
+        <main className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>
