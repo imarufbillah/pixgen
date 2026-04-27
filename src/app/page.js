@@ -54,30 +54,30 @@ export default function Home() {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-600/20 border border-violet-500/30 text-cyan-400 text-sm font-medium mb-8 backdrop-blur-sm">
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-600/20 border border-violet-500/30 text-cyan-400 text-xs sm:text-sm font-medium mb-6 sm:mb-8 backdrop-blur-sm">
             <Sparkles size={16} />
             <span>Powered by AI</span>
           </div>
 
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 font-[family-name:var(--font-syne)]">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 sm:mb-6 font-[family-name:var(--font-syne)]">
             <div className="text-white mb-2">Create. Imagine.</div>
             <div className="bg-gradient-to-r from-violet-600 to-cyan-500 bg-clip-text text-transparent">
               Generate.
             </div>
           </h1>
 
-          <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed px-4">
             Explore thousands of stunning AI-generated artworks, curated by style, mood, and model.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-4">
             <Link href="/photos">
-              <GradientButton className="px-8 py-4 text-lg">
+              <GradientButton className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg">
                 Explore Gallery
               </GradientButton>
             </Link>
-            <GhostButton className="px-8 py-4 text-lg">
+            <GhostButton className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg">
               Learn More
             </GhostButton>
           </div>
@@ -88,22 +88,22 @@ export default function Home() {
       </section>
 
       {/* Top Generations Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         <SectionHeader
           title="🔥 Top Generations"
           subtitle="Handpicked favorites from the community."
-          className="mb-12"
+          className="mb-8 sm:mb-12"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
           {topImages.map((image) => (
             <ImageCard key={image.id} image={image} />
           ))}
         </div>
 
-        <div className="flex justify-center mt-12">
+        <div className="flex justify-center mt-8 sm:mt-12">
           <Link href="/photos">
-            <GradientButton className="px-8 py-4">
+            <GradientButton className="px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base">
               View All Photos →
             </GradientButton>
           </Link>
@@ -111,46 +111,46 @@ export default function Home() {
       </section>
 
       {/* Why PixGen Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         <SectionHeader
           title="Why PixGen?"
           subtitle="The ultimate platform for AI art enthusiasts."
-          className="mb-12 text-center items-center"
+          className="mb-8 sm:mb-12 text-center items-center"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-          <div className="group p-8 bg-[#0f1318] rounded-2xl border border-white/10 hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/20">
-            <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-              <Zap className="text-white" size={28} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-8 sm:mt-12">
+          <div className="group p-6 sm:p-8 bg-[#0f1318] rounded-2xl border border-white/10 hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/20">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
+              <Zap className="text-white" size={24} />
             </div>
-            <h3 className="text-xl font-bold text-white mb-3 font-[family-name:var(--font-syne)]">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 font-[family-name:var(--font-syne)]">
               Lightning Fast
             </h3>
-            <p className="text-slate-400 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
               Browse thousands of AI-generated images with blazing-fast load times and smooth interactions.
             </p>
           </div>
 
-          <div className="group p-8 bg-[#0f1318] rounded-2xl border border-white/10 hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/20">
-            <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-              <Palette className="text-white" size={28} />
+          <div className="group p-6 sm:p-8 bg-[#0f1318] rounded-2xl border border-white/10 hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/20">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
+              <Palette className="text-white" size={24} />
             </div>
-            <h3 className="text-xl font-bold text-white mb-3 font-[family-name:var(--font-syne)]">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 font-[family-name:var(--font-syne)]">
               Diverse Styles
             </h3>
-            <p className="text-slate-400 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
               From cyberpunk to fantasy, abstract to photorealistic - discover art across every imaginable style.
             </p>
           </div>
 
-          <div className="group p-8 bg-[#0f1318] rounded-2xl border border-white/10 hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/20">
-            <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-              <TrendingUp className="text-white" size={28} />
+          <div className="group p-6 sm:p-8 bg-[#0f1318] rounded-2xl border border-white/10 hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/20">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
+              <TrendingUp className="text-white" size={24} />
             </div>
-            <h3 className="text-xl font-bold text-white mb-3 font-[family-name:var(--font-syne)]">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 font-[family-name:var(--font-syne)]">
               Top Models
             </h3>
-            <p className="text-slate-400 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
               Images generated by the latest AI models including Stable Diffusion XL, Midjourney, and DALL-E 3.
             </p>
           </div>

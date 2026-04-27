@@ -11,9 +11,9 @@ export default function PhotoDetails({ params }) {
   const image = images[0];
 
   return (
-    <div className="w-full min-h-screen py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+    <div className="w-full min-h-screen py-8 sm:py-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
           {/* Left Column - Image */}
           <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-violet-500/10">
             <Image
@@ -26,7 +26,7 @@ export default function PhotoDetails({ params }) {
           </div>
 
           {/* Right Column - Details */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4 sm:gap-6">
             {/* Category Badge */}
             <div>
               <span className="inline-block px-4 py-2 rounded-full text-sm font-medium bg-violet-600/20 text-cyan-400 border border-violet-500/30">
@@ -35,24 +35,24 @@ export default function PhotoDetails({ params }) {
             </div>
 
             {/* Title */}
-            <h1 className="text-4xl md:text-5xl font-bold text-white font-[family-name:var(--font-syne)]">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white font-[family-name:var(--font-syne)]">
               {image.title}
             </h1>
 
             {/* Prompt Section */}
             <div className="flex flex-col gap-3">
-              <h2 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">
+              <h2 className="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wider">
                 Prompt
               </h2>
-              <div className="p-4 bg-[#0f1318] border border-white/10 rounded-lg">
-                <p className="text-sm text-slate-300 font-mono leading-relaxed">
+              <div className="p-3 sm:p-4 bg-[#0f1318] border border-white/10 rounded-lg">
+                <p className="text-xs sm:text-sm text-slate-300 font-mono leading-relaxed">
                   {image.prompt}
                 </p>
               </div>
             </div>
 
             {/* Meta Grid */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               <MetaItem
                 icon={Cpu}
                 label="Model"
@@ -86,14 +86,14 @@ export default function PhotoDetails({ params }) {
 
             {/* Tags */}
             <div className="flex flex-col gap-3">
-              <h2 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">
+              <h2 className="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wider">
                 Tags
               </h2>
               <div className="flex flex-wrap gap-2">
                 {image.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 rounded-full text-sm border border-white/20 text-slate-300 hover:border-violet-500/50 hover:text-white transition-colors cursor-pointer"
+                    className="px-3 py-1 rounded-full text-xs sm:text-sm border border-white/20 text-slate-300 hover:border-violet-500/50 hover:text-white transition-colors cursor-pointer"
                   >
                     #{tag}
                   </span>
@@ -102,13 +102,13 @@ export default function PhotoDetails({ params }) {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 mt-4">
-              <GhostButton className="flex-1 flex items-center justify-center gap-2">
-                <Heart size={20} />
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-2 sm:mt-4">
+              <GhostButton className="flex-1 flex items-center justify-center gap-2 text-sm sm:text-base">
+                <Heart size={18} />
                 Like
               </GhostButton>
-              <GradientButton className="flex-1 flex items-center justify-center gap-2">
-                <Download size={20} />
+              <GradientButton className="flex-1 flex items-center justify-center gap-2 text-sm sm:text-base">
+                <Download size={18} />
                 Download
               </GradientButton>
             </div>

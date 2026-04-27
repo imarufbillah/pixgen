@@ -6,7 +6,7 @@ export default function GhostButton({ children, className = "", variant = "defau
 
   return (
     <button
-      className={`px-6 py-3 rounded-full border-2 ${variantStyles[variant]} font-semibold transition-all duration-300 hover:shadow-lg ${className}`}
+      className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full border-2 ${variantStyles[variant]} font-semibold transition-all duration-300 hover:shadow-lg text-sm sm:text-base ${className}`}
       {...props}
     >
       {children}

@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { Sparkles, MessageCircle } from "lucide-react";
+import { Sparkles } from "lucide-react";
+import { FaXTwitter, FaInstagram, FaGithub, FaDiscord } from "react-icons/fa6";
 
 export default function Footer() {
   const socialLinks = [
-    { icon: MessageCircle, href: "#", label: "Twitter" },
-    { icon: MessageCircle, href: "#", label: "Instagram" },
-    { icon: MessageCircle, href: "#", label: "GitHub" },
-    { icon: MessageCircle, href: "#", label: "Discord" }
+    { icon: FaXTwitter, href: "#", label: "Twitter" },
+    { icon: FaInstagram, href: "#", label: "Instagram" },
+    { icon: FaGithub, href: "#", label: "GitHub" },
+    { icon: FaDiscord, href: "#", label: "Discord" }
   ];
 
   const navLinks = [
@@ -19,13 +20,13 @@ export default function Footer() {
 
   return (
     <footer className="w-full bg-[#0f1318] border-t border-white/10 mt-auto">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
           {/* Column 1: Logo & Social */}
           <div className="flex flex-col gap-6">
             <Link href="/" className="flex items-center gap-2 group">
-              <Sparkles className="text-violet-400 group-hover:text-cyan-400 transition-colors duration-300" size={28} />
-              <span className="text-2xl font-bold font-[family-name:var(--font-syne)]">
+              <Sparkles className="text-violet-400 group-hover:text-cyan-400 transition-colors duration-300" size={24} />
+              <span className="text-xl md:text-2xl font-bold font-[family-name:var(--font-syne)]">
                 <span className="text-white">Pix</span>
                 <span className="bg-gradient-to-r from-violet-600 to-cyan-500 bg-clip-text text-transparent">Gen</span>
               </span>
@@ -35,7 +36,7 @@ export default function Footer() {
               "Where imagination becomes reality."
             </p>
             
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 flex-wrap">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
@@ -43,7 +44,7 @@ export default function Footer() {
                   aria-label={social.label}
                   className="w-10 h-10 rounded-full bg-[#141921] border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:border-violet-500 hover:shadow-lg hover:shadow-violet-500/30 transition-all duration-300"
                 >
-                  <social.icon size={18} />
+                  <social.icon className="text-lg" />
                 </a>
               ))}
             </div>
