@@ -7,13 +7,54 @@ import SectionHeader from "@/components/SectionHeader";
 import ImageCard from "@/components/ImageCard";
 import { images } from "@/data/images";
 
+export const metadata = {
+  title: "Home - Explore AI-Generated Art Gallery",
+  description:
+    "Discover thousands of stunning AI-generated artworks from Stable Diffusion, Midjourney, and DALL-E. Browse cyberpunk, fantasy, abstract, and photorealistic AI art. Join the PixGen community today.",
+  openGraph: {
+    title: "PixGen - AI Image Generation Gallery",
+    description:
+      "Explore thousands of stunning AI-generated artworks, curated by style, mood, and model.",
+    url: "https://pixgen.app",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "PixGen AI Art Gallery",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "https://pixgen.app",
+  },
+};
+
 export default function Home() {
   const topImages = images.slice(0, 6);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "PixGen - AI Image Generation Gallery",
+    description: "Explore thousands of stunning AI-generated artworks",
+    url: "https://pixgen.app",
+    mainEntity: {
+      "@type": "ImageGallery",
+      name: "AI-Generated Art Collection",
+      description: "Curated collection of AI-generated images from various models"
+    }
+  };
+
   return (
-    <div className="w-full">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden grain-texture">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className="w-full">
+        {/* Hero Section */}
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden grain-texture" aria-label="Hero section">
         {/* Gradient Background */}
         <div className="absolute inset-0 bg-gradient-radial from-violet-900/20 via-[#080b10] to-cyan-900/20" />
 
@@ -61,15 +102,14 @@ export default function Home() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 sm:mb-6 font-syne">
-            <div className="text-white mb-2">Create. Imagine.</div>
-            <div className="bg-linear-to-r from-violet-600 to-cyan-500 bg-clip-text text-transparent">
+            <span className="text-white mb-2 block">Create. Imagine.</span>
+            <span className="bg-linear-to-r from-violet-600 to-cyan-500 bg-clip-text text-transparent block">
               Generate.
-            </div>
+            </span>
           </h1>
 
           <p className="text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed px-4">
-            Explore thousands of stunning AI-generated artworks, curated by
-            style, mood, and model.
+            Explore thousands of stunning AI-generated artworks from Stable Diffusion, Midjourney, and DALL-E. Curated by style, mood, and AI model.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-4">
@@ -89,16 +129,18 @@ export default function Home() {
       </section>
 
       {/* Top Generations Section */}
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20" aria-labelledby="top-generations">
         <SectionHeader
           title="🔥 Top Generations"
           subtitle="Handpicked favorites from the community."
           className="mb-8 sm:mb-12"
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6" role="list">
           {topImages.map((image) => (
-            <ImageCard key={image.id} image={image} />
+            <article key={image.id} role="listitem">
+              <ImageCard image={image} />
+            </article>
           ))}
         </div>
 
@@ -112,16 +154,16 @@ export default function Home() {
       </section>
 
       {/* Why PixGen Section */}
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20" aria-labelledby="why-pixgen">
         <SectionHeader
           title="Why PixGen?"
           subtitle="The ultimate platform for AI art enthusiasts."
           className="mb-8 sm:mb-12 text-center items-center"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-8 sm:mt-12">
-          <div className="group p-6 sm:p-8 bg-[#0f1318] rounded-2xl border border-white/10 hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/20">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-linear-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-8 sm:mt-12" role="list">
+          <article className="group p-6 sm:p-8 bg-[#0f1318] rounded-2xl border border-white/10 hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/20" role="listitem">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-linear-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
               <Zap className="text-white" size={24} />
             </div>
             <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 font-syne">
@@ -131,10 +173,10 @@ export default function Home() {
               Browse thousands of AI-generated images with blazing-fast load
               times and smooth interactions.
             </p>
-          </div>
+          </article>
 
-          <div className="group p-6 sm:p-8 bg-[#0f1318] rounded-2xl border border-white/10 hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/20">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-linear-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
+          <article className="group p-6 sm:p-8 bg-[#0f1318] rounded-2xl border border-white/10 hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/20" role="listitem">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-linear-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
               <Palette className="text-white" size={24} />
             </div>
             <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 font-syne">
@@ -144,10 +186,10 @@ export default function Home() {
               From cyberpunk to fantasy, abstract to photorealistic - discover
               art across every imaginable style.
             </p>
-          </div>
+          </article>
 
-          <div className="group p-6 sm:p-8 bg-[#0f1318] rounded-2xl border border-white/10 hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/20">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-linear-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
+          <article className="group p-6 sm:p-8 bg-[#0f1318] rounded-2xl border border-white/10 hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/20" role="listitem">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-linear-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
               <TrendingUp className="text-white" size={24} />
             </div>
             <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 font-syne">
@@ -157,9 +199,10 @@ export default function Home() {
               Images generated by the latest AI models including Stable
               Diffusion XL, Midjourney, and DALL-E 3.
             </p>
-          </div>
+          </article>
         </div>
       </section>
     </div>
+    </>
   );
 }

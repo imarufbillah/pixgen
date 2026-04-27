@@ -13,16 +13,16 @@ export default function AllPhotos() {
     <div className="w-full min-h-screen py-8 sm:py-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
-        <div className="mb-8 sm:mb-12">
+        <header className="mb-8 sm:mb-12">
           <SectionHeader
             title="All Photos"
             subtitle="Discover AI-generated art across every style and category"
           />
-        </div>
+        </header>
 
         {/* Filter Bar */}
-        <div className="mb-8 sm:mb-12 overflow-x-auto pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
-          <div className="flex gap-2 sm:gap-3 min-w-max sm:min-w-0 sm:flex-wrap">
+        <nav className="mb-8 sm:mb-12 overflow-x-auto pb-4 -mx-4 px-4 sm:mx-0 sm:px-0" aria-label="Category filters">
+          <div className="flex gap-2 sm:gap-3 min-w-max sm:min-w-0 sm:flex-wrap" role="group">
             {categories.map((category) => (
               <CategoryPill
                 key={category}
@@ -33,12 +33,14 @@ export default function AllPhotos() {
               </CategoryPill>
             ))}
           </div>
-        </div>
+        </nav>
 
         {/* Photo Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6" role="list">
           {images.map((image) => (
-            <ImageCard key={image.id} image={image} />
+            <article key={image.id} role="listitem">
+              <ImageCard image={image} />
+            </article>
           ))}
         </div>
       </div>

@@ -4,13 +4,14 @@ import { Heart, Download } from "lucide-react";
 
 export default function ImageCard({ image }) {
   return (
-    <Link href={`/photos/${image.id}`}>
+    <Link href={`/photos/${image.id}`} aria-label={`View details of ${image.title}`}>
       <div className="group relative aspect-4/3 rounded-xl overflow-hidden border border-white/10 bg-[#0f1318] transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-violet-500/20">
         <Image
           src={image.imageUrl}
-          alt={image.title}
+          alt={`${image.title} - ${image.category} AI art`}
           fill
           className="object-cover"
+          loading="lazy"
         />
 
         {/* Hover Overlay */}

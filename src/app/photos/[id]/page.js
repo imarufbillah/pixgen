@@ -5,25 +5,121 @@ import GhostButton from "@/components/GhostButton";
 import MetaItem from "@/components/MetaItem";
 import { images } from "@/data/images";
 
+export async function generateMetadata({ params }) {
+  // In a real app, fetch image data based on params.id
+  const image = images[0];
+  
+  return {
+    title: `${image.title} - AI-Generated ${image.category} Art`,
+    description: `${image.prompt.substring(0, 155)}... Created with ${image.model}. ${image.likes.toLocaleString()} likes, ${image.downloads.toLocaleString()} downloads.`,
+    keywords: [
+      image.title,
+      image.category,
+      image.model,
+      "AI art",
+      "AI-generated image",
+      ...image.tags
+    ],
+    openGraph: {
+      title: `${image.title} - PixGen`,
+      description: image.prompt,
+      url: `https://pixgen.app/photos/${params.id}`,
+      type: "article",
+      images: [
+        {
+          url: image.imageUrl,
+          width: 1024,
+          height: 768,
+          alt: image.title,
+        },
+      ],
+      article: {
+        publishedTime: image.createdAt,
+        tags: image.tags,
+      },
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${image.title} - PixGen`,
+      description: image.prompt.substring(0, 200),
+      images: [image.imageUrl],
+    },
+    alternates: {
+      canonical: `https://pixgen.app/photos/${params.id}`,
+    },
+  };
+}
+
 export default function PhotoDetails({ params }) {
   // In a real app, this would fetch based on params.id
   // For design purposes, we'll use the first image
   const image = images[0];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ImageObject",
+    name: image.title,
+    description: image.prompt,
+    contentUrl: image.imageUrl,
+    thumbnailUrl: image.imageUrl,
+    uploadDate: image.createdAt,
+    creator: {
+      "@type": "Organization",
+      name: "PixGen Community"
+    },
+    keywords: image.tags.join(", "),
+    width: "1024px",
+    height: "768px",
+    interactionStatistic: [
+      {
+        "@type": "InteractionCounter",
+        interactionType: "https://schema.org/LikeAction",
+        userInteractionCount: image.likes
+      },
+      {
+        "@type": "InteractionCounter",
+        interactionType: "https://schema.org/DownloadAction",
+        userInteractionCount: image.downloads
+      }
+    ],
+    additionalProperty: [
+      {
+        "@type": "PropertyValue",
+        name: "AI Model",
+        value: image.model
+      },
+      {
+        "@type": "PropertyValue",
+        name: "Category",
+        value: image.category
+      },
+      {
+        "@type": "PropertyValue",
+        name: "Resolution",
+        value: image.resolution
+      }
+    ]
+  };
+
   return (
-    <div className="w-full min-h-screen py-8 sm:py-12">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
-          {/* Left Column - Image */}
-          <div className="relative aspect-4/3 rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-violet-500/10">
-            <Image
-              src={image.imageUrl}
-              alt={image.title}
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <article className="w-full min-h-screen py-8 sm:py-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
+            {/* Left Column - Image */}
+            <figure className="relative aspect-4/3 rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-violet-500/10">
+              <Image
+                src={image.imageUrl}
+                alt={`${image.title} - ${image.category} AI art generated with ${image.model}`}
+                fill
+                className="object-cover"
+                priority
+              />
+            </figure>
 
           {/* Right Column - Details */}
           <div className="flex flex-col gap-4 sm:gap-6">
@@ -110,7 +206,8 @@ export default function PhotoDetails({ params }) {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+        </div>
+      </article>
+    </>
   );
 }

@@ -17,14 +17,15 @@ export default function Navbar({ isLoggedIn = false }) {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#080b10]/80 backdrop-blur-xl">
+      <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#080b10]/80 backdrop-blur-xl" aria-label="Main navigation">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group">
+            <Link href="/" className="flex items-center gap-2 group" aria-label="PixGen home">
               <Sparkles
                 className="text-violet-400 group-hover:text-cyan-400 transition-colors duration-300"
                 size={20}
+                aria-hidden="true"
               />
               <span className="text-lg md:text-xl font-bold font-syne">
                 <span className="text-white">Pix</span>
@@ -35,18 +36,20 @@ export default function Navbar({ isLoggedIn = false }) {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-6 lg:gap-8">
+            <ul className="hidden md:flex items-center gap-6 lg:gap-8" role="menubar">
               {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="relative text-sm lg:text-base text-slate-300 hover:text-white transition-colors duration-300 group"
-                >
-                  {link.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-linear-to-r from-violet-600 to-cyan-500 group-hover:w-full transition-all duration-300" />
-                </Link>
+                <li key={link.href} role="none">
+                  <Link
+                    href={link.href}
+                    className="relative text-sm lg:text-base text-slate-300 hover:text-white transition-colors duration-300 group"
+                    role="menuitem"
+                  >
+                    {link.label}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-linear-to-r from-violet-600 to-cyan-500 group-hover:w-full transition-all duration-300" aria-hidden="true" />
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
 
             {/* Desktop Auth Buttons */}
             <div className="hidden md:flex items-center gap-3 lg:gap-4">
@@ -92,6 +95,9 @@ export default function Navbar({ isLoggedIn = false }) {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden text-white p-2"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -101,8 +107,8 @@ export default function Navbar({ isLoggedIn = false }) {
 
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-[#080b10] md:hidden">
-          <div className="flex flex-col items-center justify-center h-full gap-8 px-8">
+        <div className="fixed inset-0 z-40 bg-[#080b10] md:hidden" id="mobile-menu" role="dialog" aria-modal="true">
+          <nav className="flex flex-col items-center justify-center h-full gap-8 px-8" aria-label="Mobile navigation">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -145,7 +151,7 @@ export default function Navbar({ isLoggedIn = false }) {
                 </>
               )}
             </div>
-          </div>
+          </nav>
         </div>
       )}
     </>
