@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# PixGen - AI Image Generation Gallery 🎨
 
-## Getting Started
+A stunning, dark-themed UI showcase for an AI image generation gallery platform. Built with Next.js 16, Tailwind CSS, and React.
 
-First, run the development server:
+![PixGen Preview](https://img.shields.io/badge/Next.js-16.2.4-black?style=for-the-badge&logo=next.js)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38bdf8?style=for-the-badge&logo=tailwind-css)
+![React](https://img.shields.io/badge/React-19-61dafb?style=for-the-badge&logo=react)
+
+## ✨ Features
+
+- 🌑 **Dark, cinematic design** - Premium aesthetic with violet-to-cyan gradients
+- 🎭 **Smooth animations** - Floating elements, hover effects, and transitions
+- 📱 **Fully responsive** - Mobile-first design with adaptive layouts
+- 🎨 **Design-only** - Pure UI showcase with no backend logic
+- ⚡ **Fast & modern** - Built with Next.js 16 App Router and Tailwind CSS 4
+
+## 🚀 Quick Start
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the app.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 📄 Pages
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Home** (`/`) - Hero section with animated background + featured images
+- **All Photos** (`/photos`) - Gallery grid with category filters
+- **Photo Details** (`/photos/[id]`) - Detailed view with metadata
+- **Sign In** (`/signin`) - Authentication UI (design only)
+- **Sign Up** (`/signup`) - Registration UI (design only)
+- **Profile** (`/profile`) - User profile with edit mode
 
-## Learn More
+## 🎨 Design System
 
-To learn more about Next.js, take a look at the following resources:
+### Color Palette
+```css
+Background: #080b10
+Surface: #0f1318
+Accent: #7c3aed → #22d3ee (gradient)
+Text: #f1f5f9
+Muted: #64748b
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Typography
+- **Syne** - Headings and display text
+- **DM Sans** - Body and UI text
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📦 Tech Stack
 
-## Deploy on Vercel
+- Next.js 16.2.4 (App Router)
+- React 19
+- Tailwind CSS 4
+- Lucide React (icons)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📝 Project Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/              # Next.js pages
+├── components/       # Reusable UI components
+└── data/            # Mock data
+```
+
+See [PROJECT_OVERVIEW.md](./PROJECT_OVERVIEW.md) for detailed documentation.
+
+## 🎯 Use Cases
+
+- Portfolio showcase for UI/UX designers
+- Design reference for AI art platforms
+- Starting point for image gallery applications
+- Learning resource for Next.js + Tailwind CSS
+
+## 📸 Mock Data
+
+Includes 12 hardcoded AI-generated image entries with:
+- Titles, categories, and prompts
+- Model information and metadata
+- Placeholder images from Picsum
+
+## 🔧 Customization
+
+All components are modular and easy to customize:
+- Update colors in `globals.css`
+- Modify mock data in `data/images.js`
+- Adjust component styles individually
+- Change fonts in `layout.js`
+
+## 📄 License
+
+This is a design showcase project. Feel free to use and modify as needed.
+
+---
+
+**Note:** This is a design-only implementation with no authentication, API calls, or data persistence. All interactions are UI-only.
