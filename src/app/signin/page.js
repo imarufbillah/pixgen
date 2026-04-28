@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { Sparkles, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 import InputField from "@/components/InputField";
 import GradientButton from "@/components/GradientButton";
-import ToastContainer from "@/components/ToastContainer";
-import { useToast } from "@/hooks/useToast";
+import { authClient } from "../lib/auth-client";
 
 export default function SignIn() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -17,7 +19,6 @@ export default function SignIn() {
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toasts, toast, removeToast } = useToast();
 
   const validateForm = () => {
     const newErrors = {};
@@ -44,29 +45,37 @@ export default function SignIn() {
     e.preventDefault();
 
     if (!validateForm()) {
-      toast.error("Please fix the errors below", "Validation Error");
       return;
     }
 
     setIsSubmitting(true);
 
     try {
-      console.log("Form Data:", formData);
-      // Handle form submission here
-      // await signIn(formData);
+      const { data, error } = await authClient.signIn.email({
+        email: formData.email,
+        password: formData.password,
+      });
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      
-      // Success toast
-      toast.success("Welcome back! You have been signed in successfully.", "Sign In Successful");
-      
-      // Redirect or handle success (e.g., router.push('/dashboard'))
-      
+      if (error) {
+        toast.error("Sign in failed", {
+          description: error.message || "Please check your credentials and try again.",
+        });
+        return;
+      }
+
+      if (data) {
+        toast.success("Welcome back!", {
+          description: "You have been signed in successfully.",
+        });
+        
+        // Redirect to profile or home page
+        router.push("/profile");
+      }
     } catch (error) {
       console.error("Sign in error:", error);
-      toast.error("Invalid email or password. Please try again.", "Sign In Failed");
-      setErrors({ submit: "Sign in failed. Please try again." });
+      toast.error("Sign in failed", {
+        description: "An unexpected error occurred. Please try again.",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -88,9 +97,7 @@ export default function SignIn() {
   };
 
   return (
-    <>
-      <ToastContainer toasts={toasts} removeToast={removeToast} />
-      <div className="relative min-h-screen flex items-center justify-center overflow-hidden grain-texture">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden grain-texture">
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-radial from-violet-900/10 via-[#080b10] to-cyan-900/10" />
 
@@ -173,12 +180,7 @@ export default function SignIn() {
               </Link>
             </div>
 
-            {/* Submit Error */}
-            {errors.submit && (
-              <p className="text-red-400 text-sm text-center">
-                {errors.submit}
-              </p>
-            )}
+            {/* Submit Error - Removed since we're using toast notifications */}
 
             <GradientButton
               type="submit"
@@ -235,7 +237,6 @@ export default function SignIn() {
           </p>
         </div>
       </div>
-      </div>
-    </>
+    </div>
   );
 }
