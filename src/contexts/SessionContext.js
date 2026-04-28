@@ -4,7 +4,7 @@ import { createContext, useContext } from "react";
 import {
   useSession as useBetterAuthSession,
   authClient,
-} from "../app/lib/auth-client";
+} from "@/app/lib/auth-client";
 
 const SessionContext = createContext({
   session: null,

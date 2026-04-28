@@ -5,7 +5,7 @@ import { Sparkles, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { authClient } from "../lib/auth-client";
+import { authClient } from "@/app/lib/auth-client";
 import InputField from "@/components/InputField";
 import GradientButton from "@/components/GradientButton";
 import { useOAuth } from "@/hooks/useOAuth";
