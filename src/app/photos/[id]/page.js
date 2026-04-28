@@ -65,15 +65,8 @@ export default async function PhotoDetails({ params }) {
   const resolvedParams = await params;
   
   // Find the image based on the dynamic route parameter
-  // Ensure we're comparing the right types
   const imageId = String(resolvedParams.id);
   const image = images.find(img => String(img.id) === imageId);
-  
-  // Debug logging (remove in production)
-  console.log('Params ID:', resolvedParams.id, 'Type:', typeof resolvedParams.id);
-  console.log('Converted ID:', imageId);
-  console.log('Available image IDs:', images.map(img => `${img.id} (${typeof img.id})`));
-  console.log('Found image:', image ? image.title : 'Not found');
   
   // If image not found, show 404 or redirect
   if (!image) {

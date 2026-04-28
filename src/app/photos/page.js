@@ -9,6 +9,14 @@ import { images, categories } from "@/data/images";
 export default function AllPhotos() {
   const [activeCategory, setActiveCategory] = useState("All");
 
+  // Filter images based on selected category
+  const filteredImages = activeCategory === "All" 
+    ? images 
+    : images.filter(image => image.category === activeCategory);
+
+  // Get count for current category
+  const imageCount = filteredImages.length;
+
   return (
     <div className="w-full min-h-screen py-8 sm:py-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,7 +24,7 @@ export default function AllPhotos() {
         <header className="mb-8 sm:mb-12">
           <SectionHeader
             title="All Photos"
-            subtitle="Discover AI-generated art across every style and category"
+            subtitle={`Discover AI-generated art across every style and category • ${imageCount} ${imageCount === 1 ? 'image' : 'images'} ${activeCategory !== "All" ? `in ${activeCategory}` : 'total'}`}
           />
         </header>
 
@@ -36,12 +44,39 @@ export default function AllPhotos() {
         </nav>
 
         {/* Photo Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6" role="list">
-          {images.map((image) => (
-            <article key={image.id} role="listitem">
-              <ImageCard image={image} />
-            </article>
-          ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 transition-all duration-300" role="list">
+          {filteredImages.length > 0 ? (
+            filteredImages.map((image, index) => (
+              <article 
+                key={image.id} 
+                role="listitem"
+                className="animate-in fade-in-0 duration-300"
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
+                <ImageCard image={image} />
+              </article>
+            ))
+          ) : (
+            <div className="col-span-full text-center py-12 animate-in fade-in-0 duration-500">
+              <div className="max-w-md mx-auto">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-800 flex items-center justify-center">
+                  <span className="text-2xl">🎨</span>
+                </div>
+                <p className="text-slate-400 text-lg mb-4">
+                  No images found in the "{activeCategory}" category.
+                </p>
+                <p className="text-slate-500 text-sm mb-6">
+                  Try selecting a different category or view all images.
+                </p>
+                <button
+                  onClick={() => setActiveCategory("All")}
+                  className="px-6 py-2 rounded-lg bg-violet-600/20 text-violet-400 hover:bg-violet-600/30 hover:text-violet-300 transition-all duration-300 border border-violet-500/30"
+                >
+                  View All Images →
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
