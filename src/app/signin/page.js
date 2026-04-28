@@ -5,9 +5,80 @@ import { Sparkles, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import InputField from "@/components/InputField";
 import GradientButton from "@/components/GradientButton";
+import { authClient } from "../lib/auth-client";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    rememberMe: false,
+  });
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Email validation
+    if (!formData.email) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+
+    // Password validation
+    if (!formData.password) {
+      newErrors.password = "Password is required";
+    } else if (formData.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      console.log("Form Data:", formData);
+      // Handle form submission here
+      // await signIn(formData);
+
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    } catch (error) {
+      console.error("Sign in error:", error);
+      setErrors({ submit: "Sign in failed. Please try again." });
+    } finally {
+      setIsSubmitting(false);
+    }
+
+    const { data, error } = await authClient.signIn.email(formData);
+    console.log("Auth res:", data, error);
+  };
+
+  const handleInputChange = (field, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+
+    // Clear error when user starts typing
+    if (errors[field]) {
+      setErrors((prev) => ({
+        ...prev,
+        [field]: "",
+      }));
+    }
+  };
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden grain-texture">
@@ -39,18 +110,29 @@ export default function SignIn() {
           </div>
 
           {/* Form */}
-          <form className="flex flex-col gap-4 sm:gap-5">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-4 sm:gap-5"
+          >
+            {/* Email Field */}
             <InputField
               label="Email"
               type="email"
               placeholder="you@example.com"
+              value={formData.email}
+              onChange={(e) => handleInputChange("email", e.target.value)}
+              error={errors.email}
             />
 
+            {/* Password Field */}
             <div className="relative">
               <InputField
                 label="Password"
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
+                value={formData.password}
+                onChange={(e) => handleInputChange("password", e.target.value)}
+                error={errors.password}
               />
               <button
                 type="button"
@@ -61,8 +143,40 @@ export default function SignIn() {
               </button>
             </div>
 
-            <GradientButton className="w-full py-3 sm:py-4 mt-2 text-sm sm:text-base">
-              Sign In
+            {/* Remember Me Checkbox */}
+            <div className="flex items-center justify-between">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={formData.rememberMe}
+                  onChange={(e) =>
+                    handleInputChange("rememberMe", e.target.checked)
+                  }
+                  className="w-4 h-4 rounded border border-white/20 bg-transparent checked:bg-violet-600 checked:border-violet-600 focus:ring-2 focus:ring-violet-500/50 focus:ring-offset-0"
+                />
+                <span className="text-sm text-slate-400">Remember me</span>
+              </label>
+              <Link
+                href="/forgot-password"
+                className="text-sm text-violet-400 hover:text-cyan-400 transition-colors"
+              >
+                Forgot password?
+              </Link>
+            </div>
+
+            {/* Submit Error */}
+            {errors.submit && (
+              <p className="text-red-400 text-sm text-center">
+                {errors.submit}
+              </p>
+            )}
+
+            <GradientButton
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full py-3 sm:py-4 mt-2 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? "Signing In..." : "Sign In"}
             </GradientButton>
           </form>
 

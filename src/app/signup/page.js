@@ -5,9 +5,99 @@ import { Sparkles, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import InputField from "@/components/InputField";
 import GradientButton from "@/components/GradientButton";
+import { authClient } from "../lib/auth-client";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    image: "",
+    password: "",
+  });
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Name validation
+    if (!formData.name) {
+      newErrors.name = "Full name is required";
+    } else if (formData.name.length < 2) {
+      newErrors.name = "Full name must be at least 2 characters";
+    }
+
+    // Email validation
+    if (!formData.email) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+
+    // Image URL validation (optional but if provided, should be valid)
+    if (
+      formData.image &&
+      !/^https?:\/\/.+\.(jpg|jpeg|png|gif|webp)$/i.test(formData.image)
+    ) {
+      newErrors.image = "Please enter a valid image URL (jpg, png, gif, webp)";
+    }
+
+    // Password validation
+    if (!formData.password) {
+      newErrors.password = "Password is required";
+    } else if (formData.password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters";
+    } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(formData.password)) {
+      newErrors.password =
+        "Password must contain at least one uppercase letter, one lowercase letter, and one number";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      console.log("Form Data:", formData);
+      // Handle form submission here
+      // await signUp(formData);
+
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    } catch (error) {
+      console.error("Sign up error:", error);
+      setErrors({ submit: "Sign up failed. Please try again." });
+    } finally {
+      setIsSubmitting(false);
+    }
+
+    const { data, error } = await authClient.signUp.email(formData);
+    console.log("Auth res:", data, error);
+  };
+
+  const handleInputChange = (field, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+
+    // Clear error when user starts typing
+    if (errors[field]) {
+      setErrors((prev) => ({
+        ...prev,
+        [field]: "",
+      }));
+    }
+  };
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden grain-texture py-12">
@@ -39,26 +129,49 @@ export default function SignUp() {
           </div>
 
           {/* Form */}
-          <form className="flex flex-col gap-4 sm:gap-5">
-            <InputField label="Full Name" type="text" placeholder="John Doe" />
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-4 sm:gap-5"
+          >
+            {/* Full Name Field */}
+            <InputField
+              label="Full Name"
+              type="text"
+              placeholder="John Doe"
+              value={formData.name}
+              onChange={(e) => handleInputChange("name", e.target.value)}
+              error={errors.name}
+            />
 
+            {/* Email Field */}
             <InputField
               label="Email"
               type="email"
               placeholder="you@example.com"
+              value={formData.email}
+              onChange={(e) => handleInputChange("email", e.target.value)}
+              error={errors.email}
             />
 
+            {/* Profile Image URL Field */}
             <InputField
-              label="Profile Image URL"
+              label="Profile Image URL (Optional)"
               type="url"
               placeholder="https://example.com/avatar.jpg"
+              value={formData.image}
+              onChange={(e) => handleInputChange("image", e.target.value)}
+              error={errors.image}
             />
 
+            {/* Password Field */}
             <div className="relative">
               <InputField
                 label="Password"
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
+                value={formData.password}
+                onChange={(e) => handleInputChange("password", e.target.value)}
+                error={errors.password}
               />
               <button
                 type="button"
@@ -69,8 +182,19 @@ export default function SignUp() {
               </button>
             </div>
 
-            <GradientButton className="w-full py-3 sm:py-4 mt-2 text-sm sm:text-base">
-              Create Account
+            {/* Submit Error */}
+            {errors.submit && (
+              <p className="text-red-400 text-sm text-center">
+                {errors.submit}
+              </p>
+            )}
+
+            <GradientButton
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full py-3 sm:py-4 mt-2 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? "Creating Account..." : "Create Account"}
             </GradientButton>
           </form>
 
