@@ -122,7 +122,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="min-h-full flex flex-col bg-[#080b10] text-slate-100">
-        <Navbar isLoggedIn={false} />
+        <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
         <Toaster 

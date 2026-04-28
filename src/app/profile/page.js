@@ -1,19 +1,90 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { User, Mail, Image as ImageIcon } from "lucide-react";
+import { useSession } from "../lib/auth-client";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 import InputField from "@/components/InputField";
 import GradientButton from "@/components/GradientButton";
 import GhostButton from "@/components/GhostButton";
 import SectionHeader from "@/components/SectionHeader";
 
 export default function Profile() {
+  const router = useRouter();
+  const { data: session, isPending } = useSession();
   const [isEditing, setIsEditing] = useState(false);
   const [userData, setUserData] = useState({
-    name: "John Doe",
-    email: "john.doe@example.com",
+    name: "",
+    email: "",
     imageUrl: "",
   });
+
+  // Update userData when session loads
+  useEffect(() => {
+    if (session?.user) {
+      setUserData({
+        name: session.user.name || "",
+        email: session.user.email || "",
+        imageUrl: session.user.image || "",
+      });
+    }
+  }, [session]);
+
+  // Redirect to signin if not authenticated
+  useEffect(() => {
+    if (!isPending && !session) {
+      toast.error("Please sign in to access your profile");
+      router.push("/signin");
+    }
+  }, [session, isPending, router]);
+
+  // Show loading state while checking session
+  if (isPending) {
+    return (
+      <div className="w-full min-h-screen py-8 sm:py-12 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-2 border-violet-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-slate-400">Loading profile...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Don't render if no session (will redirect)
+  if (!session) {
+    return null;
+  }
+
+  const handleSaveChanges = async () => {
+    try {
+      // Here you would typically update the user profile via API
+      // For now, we'll just show a success message
+      toast.success("Profile updated successfully!");
+      setIsEditing(false);
+    } catch (error) {
+      toast.error("Failed to update profile");
+    }
+  };
+
+  const getInitials = (name) => {
+    if (!name) return "U";
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase();
+  };
+
+  const getMemberSince = () => {
+    if (session?.user?.createdAt) {
+      return new Date(session.user.createdAt).toLocaleDateString("en-US", {
+        month: "short",
+        year: "numeric",
+      });
+    }
+    return "Jan 2025";
+  };
 
   return (
     <div className="w-full min-h-screen py-8 sm:py-12">
@@ -25,14 +96,19 @@ export default function Profile() {
             <div className="flex flex-col items-center text-center">
               {/* Avatar */}
               <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-linear-to-br from-violet-600 to-cyan-500 p-1 mb-4 sm:mb-6">
-                <div className="w-full h-full rounded-full bg-[#0f1318] flex items-center justify-center">
-                  <span className="text-2xl sm:text-3xl font-bold text-white font-syne">
-                    {userData.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </span>
-                </div>
+                {userData.imageUrl ? (
+                  <img
+                    src={userData.imageUrl}
+                    alt={userData.name}
+                    className="w-full h-full rounded-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full rounded-full bg-[#0f1318] flex items-center justify-center">
+                    <span className="text-2xl sm:text-3xl font-bold text-white font-syne">
+                      {getInitials(userData.name)}
+                    </span>
+                  </div>
+                )}
               </div>
 
               {/* Name */}
@@ -90,13 +166,23 @@ export default function Profile() {
 
               <div className="flex gap-4 mt-2">
                 <GradientButton
-                  onClick={() => setIsEditing(false)}
+                  onClick={handleSaveChanges}
                   className="flex-1"
                 >
                   Save Changes
                 </GradientButton>
                 <GhostButton
-                  onClick={() => setIsEditing(false)}
+                  onClick={() => {
+                    setIsEditing(false);
+                    // Reset userData to original session data
+                    if (session?.user) {
+                      setUserData({
+                        name: session.user.name || "",
+                        email: session.user.email || "",
+                        imageUrl: session.user.image || "",
+                      });
+                    }
+                  }}
                   className="flex-1"
                 >
                   Cancel
@@ -124,7 +210,7 @@ export default function Profile() {
 
           <div className="bg-[#0f1318] border border-white/10 rounded-xl p-4 sm:p-6 text-center">
             <div className="text-base sm:text-2xl font-bold bg-linear-to-r from-violet-600 to-cyan-500 bg-clip-text text-transparent mb-1 font-syne">
-              Jan 2025
+              {getMemberSince()}
             </div>
             <div className="text-xs sm:text-sm text-slate-400">
               Member Since

@@ -69,7 +69,7 @@ export default function SignIn() {
         });
         
         // Redirect to profile or home page
-        router.push("/profile");
+        router.push("/");
       }
     } catch (error) {
       console.error("Sign in error:", error);
