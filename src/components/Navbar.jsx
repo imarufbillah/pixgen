@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Sparkles, Menu, X } from "lucide-react";
 import { useState } from "react";
 import GradientButton from "./GradientButton";
@@ -8,12 +9,21 @@ import GhostButton from "./GhostButton";
 
 export default function Navbar({ isLoggedIn = false }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/photos", label: "All Photos" },
     { href: "/profile", label: "Profile" },
   ];
+
+  // Function to check if a link is active
+  const isActiveLink = (href) => {
+    if (href === "/") {
+      return pathname === "/";
+    }
+    return pathname.startsWith(href);
+  };
 
   return (
     <>
@@ -37,18 +47,32 @@ export default function Navbar({ isLoggedIn = false }) {
 
             {/* Desktop Navigation */}
             <ul className="hidden md:flex items-center gap-6 lg:gap-8" role="menubar">
-              {navLinks.map((link) => (
-                <li key={link.href} role="none">
-                  <Link
-                    href={link.href}
-                    className="relative text-sm lg:text-base text-slate-300 hover:text-white transition-colors duration-300 group"
-                    role="menuitem"
-                  >
-                    {link.label}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-linear-to-r from-violet-600 to-cyan-500 group-hover:w-full transition-all duration-300" aria-hidden="true" />
-                  </Link>
-                </li>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = isActiveLink(link.href);
+                return (
+                  <li key={link.href} role="none">
+                    <Link
+                      href={link.href}
+                      className={`relative text-sm lg:text-base transition-colors duration-300 group ${
+                        isActive
+                          ? "text-white"
+                          : "text-slate-300 hover:text-white"
+                      }`}
+                      role="menuitem"
+                    >
+                      {link.label}
+                      <span 
+                        className={`absolute -bottom-1 left-0 h-0.5 bg-linear-to-r from-violet-600 to-cyan-500 transition-all duration-300 ${
+                          isActive 
+                            ? "w-full" 
+                            : "w-0 group-hover:w-full"
+                        }`} 
+                        aria-hidden="true" 
+                      />
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
 
             {/* Desktop Auth Buttons */}
@@ -109,16 +133,23 @@ export default function Navbar({ isLoggedIn = false }) {
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-40 bg-[#080b10] md:hidden" id="mobile-menu" role="dialog" aria-modal="true">
           <nav className="flex flex-col items-center justify-center h-full gap-8 px-8" aria-label="Mobile navigation">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-2xl font-bold text-white hover:text-violet-400 transition-colors font-syne"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = isActiveLink(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`text-2xl font-bold transition-colors font-syne ${
+                    isActive
+                      ? "text-violet-400"
+                      : "text-white hover:text-violet-400"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
 
             <div className="flex flex-col gap-4 w-full max-w-xs mt-8">
               {isLoggedIn ? (
