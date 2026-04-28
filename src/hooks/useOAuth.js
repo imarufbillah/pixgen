@@ -34,6 +34,7 @@ export function useOAuth(options = {}) {
       });
 
       if (error) {
+        console.error(`OAuth error (${provider}):`, error);
         toast.error("Authentication failed", {
           description: error.message || `Failed to sign in with ${provider}`,
         });
@@ -59,6 +60,15 @@ export function useOAuth(options = {}) {
       }
     } catch (error) {
       console.error(`OAuth sign in error (${provider}):`, error);
+      
+      // More detailed error logging for debugging
+      if (error.message) {
+        console.error("Error message:", error.message);
+      }
+      if (error.response) {
+        console.error("Error response:", error.response);
+      }
+      
       toast.error("Authentication failed", {
         description: "An unexpected error occurred. Please try again.",
       });
