@@ -14,6 +14,7 @@ export default function Navbar({ isLoggedIn = false }) {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/photos", label: "All Photos" },
+    { href: "/pricing", label: "Pricing" },
     { href: "/profile", label: "Profile" },
   ];
 
