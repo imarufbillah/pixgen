@@ -111,11 +111,12 @@ export default function Pricing() {
     "@context": "https://schema.org",
     "@type": "Product",
     name: "PixGen AI Art Generation",
-    description: "AI-powered image generation platform with multiple pricing tiers",
-    offers: plans.map(plan => ({
+    description:
+      "AI-powered image generation platform with multiple pricing tiers",
+    offers: plans.map((plan) => ({
       "@type": "Offer",
       name: `PixGen ${plan.name}`,
-      price: plan.price.replace('$', ''),
+      price: plan.price.replace("$", ""),
       priceCurrency: "USD",
       description: plan.description,
       availability: "https://schema.org/InStock",
@@ -138,7 +139,8 @@ export default function Pricing() {
               className="mb-8"
             />
             <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-              Whether you're exploring AI art or running a creative business, we have the perfect plan for your needs.
+              Whether you&apos;re exploring AI art or running a creative
+              business, we have the perfect plan for your needs.
             </p>
           </div>
 
@@ -151,14 +153,14 @@ export default function Pricing() {
                   key={plan.name}
                   className={`relative p-6 sm:p-8 rounded-2xl border transition-all duration-300 hover:scale-105 ${
                     plan.popular
-                      ? "border-violet-500/50 bg-gradient-to-b from-violet-900/20 to-[#0f1318] shadow-2xl shadow-violet-500/20"
+                      ? "border-violet-500/50 bg-linear-to-b from-violet-900/20 to-[#0f1318] shadow-2xl shadow-violet-500/20"
                       : "border-white/10 bg-[#0f1318] hover:border-white/20"
                   }`}
                 >
                   {/* Popular Badge */}
                   {plan.popular && (
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                      <div className="px-4 py-1 rounded-full bg-gradient-to-r from-violet-600 to-cyan-500 text-white text-sm font-semibold">
+                      <div className="px-4 py-1 rounded-full bg-linear-to-r from-violet-600 to-cyan-500 text-white text-sm font-semibold">
                         Most Popular
                       </div>
                     </div>
@@ -166,11 +168,13 @@ export default function Pricing() {
 
                   {/* Plan Header */}
                   <div className="text-center mb-6">
-                    <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center ${
-                      plan.popular 
-                        ? "bg-gradient-to-br from-violet-600 to-cyan-500" 
-                        : "bg-slate-800"
-                    }`}>
+                    <div
+                      className={`w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center ${
+                        plan.popular
+                          ? "bg-linear-to-br from-violet-600 to-cyan-500"
+                          : "bg-slate-800"
+                      }`}
+                    >
                       <IconComponent className="text-white" size={28} />
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-2 font-syne">
@@ -183,9 +187,7 @@ export default function Pricing() {
                       <span className="text-4xl font-bold text-white">
                         {plan.price}
                       </span>
-                      <span className="text-slate-400 ml-2">
-                        {plan.period}
-                      </span>
+                      <span className="text-slate-400 ml-2">{plan.period}</span>
                     </div>
                   </div>
 
@@ -194,11 +196,13 @@ export default function Pricing() {
                     <ul className="space-y-3">
                       {plan.features.map((feature, index) => (
                         <li key={index} className="flex items-start gap-3">
-                          <Check 
-                            className={`mt-0.5 flex-shrink-0 ${
-                              plan.popular ? "text-violet-400" : "text-green-400"
-                            }`} 
-                            size={16} 
+                          <Check
+                            className={`mt-0.5 shrink-0 ${
+                              plan.popular
+                                ? "text-violet-400"
+                                : "text-green-400"
+                            }`}
+                            size={16}
                           />
                           <span className="text-slate-300 text-sm">
                             {feature}
@@ -237,7 +241,8 @@ export default function Pricing() {
                     Can I change plans anytime?
                   </h3>
                   <p className="text-slate-400 text-sm">
-                    Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately.
+                    Yes! You can upgrade or downgrade your plan at any time.
+                    Changes take effect immediately.
                   </p>
                 </div>
                 <div>
@@ -245,7 +250,8 @@ export default function Pricing() {
                     What happens to unused generations?
                   </h3>
                   <p className="text-slate-400 text-sm">
-                    Unused generations don't roll over to the next month. We recommend choosing a plan that fits your monthly usage.
+                    Unused generations don&apos;t roll over to the next month.
+                    We recommend choosing a plan that fits your monthly usage.
                   </p>
                 </div>
                 <div>
@@ -253,7 +259,8 @@ export default function Pricing() {
                     Do you offer refunds?
                   </h3>
                   <p className="text-slate-400 text-sm">
-                    We offer a 30-day money-back guarantee for all paid plans. No questions asked.
+                    We offer a 30-day money-back guarantee for all paid plans.
+                    No questions asked.
                   </p>
                 </div>
               </div>
@@ -263,7 +270,9 @@ export default function Pricing() {
                     What AI models are included?
                   </h3>
                   <p className="text-slate-400 text-sm">
-                    Free includes Stable Diffusion. Pro adds SDXL, Midjourney, and DALL-E. Enterprise includes all current and future models.
+                    Free includes Stable Diffusion. Pro adds SDXL, Midjourney,
+                    and DALL-E. Enterprise includes all current and future
+                    models.
                   </p>
                 </div>
                 <div>
@@ -271,7 +280,8 @@ export default function Pricing() {
                     Can I use images commercially?
                   </h3>
                   <p className="text-slate-400 text-sm">
-                    Pro and Enterprise plans include commercial licensing. Free plan is for personal use only.
+                    Pro and Enterprise plans include commercial licensing. Free
+                    plan is for personal use only.
                   </p>
                 </div>
                 <div>
@@ -279,7 +289,8 @@ export default function Pricing() {
                     Is there an API available?
                   </h3>
                   <p className="text-slate-400 text-sm">
-                    API access is included with Enterprise plans. Contact our sales team for custom API solutions.
+                    API access is included with Enterprise plans. Contact our
+                    sales team for custom API solutions.
                   </p>
                 </div>
               </div>
@@ -288,12 +299,13 @@ export default function Pricing() {
 
           {/* CTA Section */}
           <div className="mt-16 sm:mt-20 text-center">
-            <div className="p-8 sm:p-12 rounded-2xl bg-gradient-to-r from-violet-900/20 to-cyan-900/20 border border-violet-500/30">
+            <div className="p-8 sm:p-12 rounded-2xl bg-linear-to-r from-violet-900/20 to-cyan-900/20 border border-violet-500/30">
               <h2 className="text-3xl font-bold text-white mb-4 font-syne">
                 Ready to Create Amazing AI Art?
               </h2>
               <p className="text-slate-400 mb-8 max-w-2xl mx-auto">
-                Join thousands of creators who are already using PixGen to bring their imagination to life.
+                Join thousands of creators who are already using PixGen to bring
+                their imagination to life.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <GradientButton className="px-8 py-3 text-lg">
