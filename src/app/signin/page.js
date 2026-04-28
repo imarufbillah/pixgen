@@ -5,7 +5,8 @@ import { Sparkles, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import InputField from "@/components/InputField";
 import GradientButton from "@/components/GradientButton";
-import { authClient } from "../lib/auth-client";
+import ToastContainer from "@/components/ToastContainer";
+import { useToast } from "@/hooks/useToast";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -16,6 +17,7 @@ export default function SignIn() {
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toasts, toast, removeToast } = useToast();
 
   const validateForm = () => {
     const newErrors = {};
@@ -42,6 +44,7 @@ export default function SignIn() {
     e.preventDefault();
 
     if (!validateForm()) {
+      toast.error("Please fix the errors below", "Validation Error");
       return;
     }
 
@@ -54,15 +57,19 @@ export default function SignIn() {
 
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
+      
+      // Success toast
+      toast.success("Welcome back! You have been signed in successfully.", "Sign In Successful");
+      
+      // Redirect or handle success (e.g., router.push('/dashboard'))
+      
     } catch (error) {
       console.error("Sign in error:", error);
+      toast.error("Invalid email or password. Please try again.", "Sign In Failed");
       setErrors({ submit: "Sign in failed. Please try again." });
     } finally {
       setIsSubmitting(false);
     }
-
-    const { data, error } = await authClient.signIn.email(formData);
-    console.log("Auth res:", data, error);
   };
 
   const handleInputChange = (field, value) => {
@@ -81,7 +88,9 @@ export default function SignIn() {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden grain-texture">
+    <>
+      <ToastContainer toasts={toasts} removeToast={removeToast} />
+      <div className="relative min-h-screen flex items-center justify-center overflow-hidden grain-texture">
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-radial from-violet-900/10 via-[#080b10] to-cyan-900/10" />
 
@@ -226,6 +235,7 @@ export default function SignIn() {
           </p>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }
