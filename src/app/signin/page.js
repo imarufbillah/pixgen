@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { authClient } from "../lib/auth-client";
 import InputField from "@/components/InputField";
 import GradientButton from "@/components/GradientButton";
+import { useOAuth } from "@/hooks/useOAuth";
 
 export default function SignIn() {
   const router = useRouter();
@@ -19,6 +20,11 @@ export default function SignIn() {
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Use the reusable OAuth hook
+  const { signInWithOAuth, isLoading: isOAuthLoading } = useOAuth({
+    redirectTo: "/",
+  });
 
   const validateForm = () => {
     const newErrors = {};
@@ -58,7 +64,8 @@ export default function SignIn() {
 
       if (error) {
         toast.error("Sign in failed", {
-          description: error.message || "Please check your credentials and try again.",
+          description:
+            error.message || "Please check your credentials and try again.",
         });
         return;
       }
@@ -67,7 +74,7 @@ export default function SignIn() {
         toast.success("Welcome back!", {
           description: "You have been signed in successfully.",
         });
-        
+
         // Redirect to profile or home page
         router.push("/");
       }
@@ -79,6 +86,10 @@ export default function SignIn() {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleGoogleOAuth = () => {
+    signInWithOAuth("google");
   };
 
   const handleInputChange = (field, value) => {
@@ -201,7 +212,11 @@ export default function SignIn() {
           </div>
 
           {/* Google OAuth Button */}
-          <button className="w-full flex items-center justify-center gap-3 px-4 sm:px-6 py-3 sm:py-4 bg-white rounded-lg hover:bg-slate-100 transition-colors">
+          <button
+            onClick={handleGoogleOAuth}
+            disabled={isOAuthLoading}
+            className="w-full flex items-center justify-center gap-3 px-4 sm:px-6 py-3 sm:py-4 bg-white rounded-lg hover:bg-slate-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
             <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24">
               <path
                 fill="#4285F4"
@@ -221,7 +236,7 @@ export default function SignIn() {
               />
             </svg>
             <span className="text-slate-900 font-semibold text-sm sm:text-base">
-              Continue with Google
+              {isOAuthLoading ? "Signing in..." : "Continue with Google"}
             </span>
           </button>
 

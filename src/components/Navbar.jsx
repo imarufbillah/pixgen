@@ -128,6 +128,8 @@ export default function Navbar() {
                           src={session.user.image}
                           alt={session.user.name}
                           className="w-full h-full rounded-full object-cover"
+                          width={36}
+                          height={36}
                         />
                       ) : (
                         <div className="w-full h-full rounded-full bg-[#080b10] flex items-center justify-center text-white text-xs lg:text-sm font-semibold">
