@@ -1,13 +1,23 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Heart, Download, Cpu, Maximize2, Calendar } from "lucide-react";
 import GradientButton from "@/components/GradientButton";
 import GhostButton from "@/components/GhostButton";
 import MetaItem from "@/components/MetaItem";
 import { images } from "@/data/images";
 
+// Generate static params for all images (optional but recommended for performance)
+export async function generateStaticParams() {
+  return images.map((image) => ({
+    id: image.id,
+  }));
+}
+
 export async function generateMetadata({ params }) {
-  // In a real app, fetch image data based on params.id
-  const image = images[0];
+  // Await params since it's a Promise in Next.js 15+
+  const resolvedParams = await params;
+  // Find the image based on the dynamic route parameter
+  const image = images.find(img => img.id === resolvedParams.id) || images[0];
   
   return {
     title: `${image.title} - AI-Generated ${image.category} Art`,
@@ -23,7 +33,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: `${image.title} - PixGen`,
       description: image.prompt,
-      url: `https://pixgen.app/photos/${params.id}`,
+      url: `https://pixgen.app/photos/${resolvedParams.id}`,
       type: "article",
       images: [
         {
@@ -45,15 +55,45 @@ export async function generateMetadata({ params }) {
       images: [image.imageUrl],
     },
     alternates: {
-      canonical: `https://pixgen.app/photos/${params.id}`,
+      canonical: `https://pixgen.app/photos/${resolvedParams.id}`,
     },
   };
 }
 
-export default function PhotoDetails({ params }) {
-  // In a real app, this would fetch based on params.id
-  // For design purposes, we'll use the first image
-  const image = images[0];
+export default async function PhotoDetails({ params }) {
+  // Await params since it's a Promise in Next.js 15+
+  const resolvedParams = await params;
+  
+  // Find the image based on the dynamic route parameter
+  // Ensure we're comparing the right types
+  const imageId = String(resolvedParams.id);
+  const image = images.find(img => String(img.id) === imageId);
+  
+  // Debug logging (remove in production)
+  console.log('Params ID:', resolvedParams.id, 'Type:', typeof resolvedParams.id);
+  console.log('Converted ID:', imageId);
+  console.log('Available image IDs:', images.map(img => `${img.id} (${typeof img.id})`));
+  console.log('Found image:', image ? image.title : 'Not found');
+  
+  // If image not found, show 404 or redirect
+  if (!image) {
+    return (
+      <div className="w-full min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold text-white mb-4">Image Not Found</h1>
+          <p className="text-slate-400 mb-8">
+            The image you're looking for doesn't exist. (ID: {resolvedParams.id})
+          </p>
+          <p className="text-slate-500 text-sm mb-8">
+            Available IDs: {images.map(img => img.id).join(', ')}
+          </p>
+          <Link href="/photos" className="text-violet-400 hover:text-violet-300">
+            ← Back to Gallery
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   const jsonLd = {
     "@context": "https://schema.org",
