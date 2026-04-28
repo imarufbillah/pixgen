@@ -7,6 +7,6 @@ export default function robots() {
         disallow: ["/api/", "/admin/"],
       },
     ],
-    sitemap: "https://pixgen.app/sitemap.xml",
+    sitemap: "https://pixgen-by-marufbillah.vercel.app/sitemap.xml",
   };
 }

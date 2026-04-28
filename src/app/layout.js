@@ -16,7 +16,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://pixgen.app"),
+  metadataBase: new URL("https://pixgen-by-marufbillah.vercel.app"),
   title: {
     default: "PixGen - AI Image Generation Gallery | Explore AI Art",
     template: "%s | PixGen",
@@ -50,7 +50,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://pixgen.app",
+    url: "https://pixgen-by-marufbillah.vercel.app",
     siteName: "PixGen",
     title: "PixGen - AI Image Generation Gallery",
     description:
@@ -96,12 +96,12 @@ export default function RootLayout({ children }) {
     name: "PixGen",
     description:
       "AI Image Generation Gallery - Explore stunning AI-generated artworks",
-    url: "https://pixgen.app",
+    url: "https://pixgen-by-marufbillah.vercel.app",
     potentialAction: {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: "https://pixgen.app/photos?q={search_term_string}",
+        urlTemplate: "https://pixgen-by-marufbillah.vercel.app/photos?q={search_term_string}",
       },
       "query-input": "required name=search_term_string",
     },
@@ -114,7 +114,7 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning
     >
       <head>
-        <link rel="canonical" href="https://pixgen.app" />
+        <link rel="canonical" href="https://pixgen-by-marufbillah.vercel.app" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

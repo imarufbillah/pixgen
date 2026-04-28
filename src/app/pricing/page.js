@@ -19,7 +19,7 @@ export const metadata = {
     title: "PixGen Pricing - AI Art Generation Plans",
     description:
       "Choose from Free, Pro, or Enterprise plans. Generate stunning AI art with premium models and commercial licensing.",
-    url: "https://pixgen.app/pricing",
+    url: "https://pixgen-by-marufbillah.vercel.app/pricing",
     images: [
       {
         url: "/og-pricing.jpg",
@@ -30,7 +30,7 @@ export const metadata = {
     ],
   },
   alternates: {
-    canonical: "https://pixgen.app/pricing",
+    canonical: "https://pixgen-by-marufbillah.vercel.app/pricing",
   },
 };
 

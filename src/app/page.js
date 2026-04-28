@@ -15,7 +15,7 @@ export const metadata = {
     title: "PixGen - AI Image Generation Gallery",
     description:
       "Explore thousands of stunning AI-generated artworks, curated by style, mood, and model.",
-    url: "https://pixgen.app",
+    url: "https://pixgen-by-marufbillah.vercel.app",
     images: [
       {
         url: "/og-image.jpg",
@@ -26,7 +26,7 @@ export const metadata = {
     ],
   },
   alternates: {
-    canonical: "https://pixgen.app",
+    canonical: "https://pixgen-by-marufbillah.vercel.app",
   },
 };
 
@@ -38,7 +38,7 @@ export default function Home() {
     "@type": "CollectionPage",
     name: "PixGen - AI Image Generation Gallery",
     description: "Explore thousands of stunning AI-generated artworks",
-    url: "https://pixgen.app",
+    url: "https://pixgen-by-marufbillah.vercel.app",
     mainEntity: {
       "@type": "ImageGallery",
       name: "AI-Generated Art Collection",

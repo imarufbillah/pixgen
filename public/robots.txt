@@ -4,4 +4,4 @@ Allow: /
 Disallow: /api/
 Disallow: /admin/
 
-Sitemap: https://pixgen.app/sitemap.xml
+Sitemap: https://pixgen-by-marufbillah.vercel.app/sitemap.xml

@@ -18,7 +18,7 @@ export const metadata = {
     title: "All Photos - PixGen AI Art Gallery",
     description:
       "Browse our complete collection of AI-generated images across all categories and styles.",
-    url: "https://pixgen.app/photos",
+    url: "https://pixgen-by-marufbillah.vercel.app/photos",
     images: [
       {
         url: "/og-photos.jpg",
@@ -29,7 +29,7 @@ export const metadata = {
     ],
   },
   alternates: {
-    canonical: "https://pixgen.app/photos",
+    canonical: "https://pixgen-by-marufbillah.vercel.app/photos",
   },
 };
 

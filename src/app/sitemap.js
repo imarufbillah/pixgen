@@ -1,7 +1,7 @@
 import { images } from "@/data/images";
 
 export default function sitemap() {
-  const baseUrl = "https://pixgen.app";
+  const baseUrl = "https://pixgen-by-marufbillah.vercel.app";
 
   // Static pages
   const staticPages = [

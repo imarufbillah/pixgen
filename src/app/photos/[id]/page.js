@@ -33,7 +33,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: `${image.title} - PixGen`,
       description: image.prompt,
-      url: `https://pixgen.app/photos/${resolvedParams.id}`,
+      url: `https://pixgen-by-marufbillah.vercel.app/photos/${resolvedParams.id}`,
       type: "article",
       images: [
         {
@@ -55,7 +55,7 @@ export async function generateMetadata({ params }) {
       images: [image.imageUrl],
     },
     alternates: {
-      canonical: `https://pixgen.app/photos/${resolvedParams.id}`,
+      canonical: `https://pixgen-by-marufbillah.vercel.app/photos/${resolvedParams.id}`,
     },
   };
 }
