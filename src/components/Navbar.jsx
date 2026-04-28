@@ -4,14 +4,15 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Sparkles, Menu, X } from "lucide-react";
 import { useState } from "react";
-import { useSession, authClient } from "../app/lib/auth-client";
+import { useSession } from "../contexts/SessionContext";
 import { toast } from "sonner";
 import GradientButton from "./GradientButton";
 import GhostButton from "./GhostButton";
+import Image from "next/image";
 
 export default function Navbar() {
   const router = useRouter();
-  const { data: session, isPending } = useSession();
+  const { session, isPending, signOut } = useSession();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
@@ -23,12 +24,12 @@ export default function Navbar() {
   ];
 
   const handleLogout = async () => {
-    try {
-      await authClient.signOut();
+    const result = await signOut();
+    if (result.success) {
       toast.success("Signed out successfully");
       setMobileMenuOpen(false);
       router.push("/");
-    } catch (error) {
+    } else {
       toast.error("Failed to sign out");
     }
   };
@@ -52,11 +53,18 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#080b10]/80 backdrop-blur-xl" aria-label="Main navigation">
+      <nav
+        className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#080b10]/80 backdrop-blur-xl"
+        aria-label="Main navigation"
+      >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group" aria-label="PixGen home">
+            <Link
+              href="/"
+              className="flex items-center gap-2 group"
+              aria-label="PixGen home"
+            >
               <Sparkles
                 className="text-violet-400 group-hover:text-cyan-400 transition-colors duration-300"
                 size={20}
@@ -71,7 +79,10 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Navigation */}
-            <ul className="hidden md:flex items-center gap-6 lg:gap-8" role="menubar">
+            <ul
+              className="hidden md:flex items-center gap-6 lg:gap-8"
+              role="menubar"
+            >
               {navLinks.map((link) => {
                 const isActive = isActiveLink(link.href);
                 return (
@@ -86,13 +97,11 @@ export default function Navbar() {
                       role="menuitem"
                     >
                       {link.label}
-                      <span 
+                      <span
                         className={`absolute -bottom-1 left-0 h-0.5 bg-linear-to-r from-violet-600 to-cyan-500 transition-all duration-300 ${
-                          isActive 
-                            ? "w-full" 
-                            : "w-0 group-hover:w-full"
-                        }`} 
-                        aria-hidden="true" 
+                          isActive ? "w-full" : "w-0 group-hover:w-full"
+                        }`}
+                        aria-hidden="true"
                       />
                     </Link>
                   </li>
@@ -115,7 +124,7 @@ export default function Navbar() {
                     </span>
                     <div className="w-8 h-8 lg:w-9 lg:h-9 rounded-full bg-linear-to-br from-violet-600 to-cyan-500 p-0.5">
                       {session.user?.image ? (
-                        <img
+                        <Image
                           src={session.user.image}
                           alt={session.user.name}
                           className="w-full h-full rounded-full object-cover"
@@ -167,8 +176,16 @@ export default function Navbar() {
 
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-[#080b10] md:hidden" id="mobile-menu" role="dialog" aria-modal="true">
-          <nav className="flex flex-col items-center justify-center h-full gap-8 px-8" aria-label="Mobile navigation">
+        <div
+          className="fixed inset-0 z-40 bg-[#080b10] md:hidden"
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+        >
+          <nav
+            className="flex flex-col items-center justify-center h-full gap-8 px-8"
+            aria-label="Mobile navigation"
+          >
             {navLinks.map((link) => {
               const isActive = isActiveLink(link.href);
               return (
@@ -201,10 +218,12 @@ export default function Navbar() {
                     <div className="flex items-center justify-center gap-3 p-4 bg-[#0f1318] rounded-xl border border-white/10">
                       <div className="w-12 h-12 rounded-full bg-linear-to-br from-violet-600 to-cyan-500 p-0.5">
                         {session.user?.image ? (
-                          <img
+                          <Image
                             src={session.user.image}
                             alt={session.user.name}
                             className="w-full h-full rounded-full object-cover"
+                            width={48}
+                            height={48}
                           />
                         ) : (
                           <div className="w-full h-full rounded-full bg-[#080b10] flex items-center justify-center text-white font-semibold">
@@ -217,7 +236,11 @@ export default function Navbar() {
                       </span>
                     </div>
                   </Link>
-                  <GhostButton onClick={handleLogout} variant="danger" className="w-full">
+                  <GhostButton
+                    onClick={handleLogout}
+                    variant="danger"
+                    className="w-full"
+                  >
                     Logout
                   </GhostButton>
                 </>

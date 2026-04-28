@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Toaster } from "sonner";
+import { SessionProvider } from "@/contexts/SessionContext";
 
 const syne = Syne({
   variable: "--font-syne",
@@ -122,20 +123,22 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="min-h-full flex flex-col bg-[#080b10] text-slate-100">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <Toaster 
-          theme="dark" 
-          position="top-right"
-          toastOptions={{
-            style: {
-              background: '#0f1318',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              color: '#f1f5f9',
-            },
-          }}
-        />
+        <SessionProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <Toaster 
+            theme="dark" 
+            position="top-right"
+            toastOptions={{
+              style: {
+                background: '#0f1318',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                color: '#f1f5f9',
+              },
+            }}
+          />
+        </SessionProvider>
       </body>
     </html>
   );

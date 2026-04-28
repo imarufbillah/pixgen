@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { User, Mail, Image as ImageIcon } from "lucide-react";
-import { useSession } from "../lib/auth-client";
+import { useSession } from "../../contexts/SessionContext";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import InputField from "@/components/InputField";
@@ -12,7 +12,7 @@ import SectionHeader from "@/components/SectionHeader";
 
 export default function Profile() {
   const router = useRouter();
-  const { data: session, isPending } = useSession();
+  const { session, isPending } = useSession();
   const [isEditing, setIsEditing] = useState(false);
   const [userData, setUserData] = useState({
     name: "",

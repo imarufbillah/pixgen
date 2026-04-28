@@ -5,7 +5,11 @@ import { FaXTwitter, FaInstagram, FaGithub, FaDiscord } from "react-icons/fa6";
 export default function Footer() {
   const socialLinks = [
     { icon: FaXTwitter, href: "https://twitter.com/pixgen", label: "Twitter" },
-    { icon: FaInstagram, href: "https://instagram.com/pixgen", label: "Instagram" },
+    {
+      icon: FaInstagram,
+      href: "https://instagram.com/pixgen",
+      label: "Instagram",
+    },
     { icon: FaGithub, href: "https://github.com/pixgen", label: "GitHub" },
     { icon: FaDiscord, href: "https://discord.gg/pixgen", label: "Discord" },
   ];
@@ -19,12 +23,19 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full bg-[#0f1318] border-t border-white/10 mt-auto" role="contentinfo">
+    <footer
+      className="w-full bg-[#0f1318] border-t border-white/10 mt-auto"
+      role="contentinfo"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
           {/* Column 1: Logo & Social */}
           <div className="flex flex-col gap-6">
-            <Link href="/" className="flex items-center gap-2 group" aria-label="PixGen home">
+            <Link
+              href="/"
+              className="flex items-center gap-2 group"
+              aria-label="PixGen home"
+            >
               <Sparkles
                 className="text-violet-400 group-hover:text-cyan-400 transition-colors duration-300"
                 size={24}
@@ -42,7 +53,10 @@ export default function Footer() {
               &quot;Where imagination becomes reality.&quot;
             </p>
 
-            <nav className="flex items-center gap-3 flex-wrap" aria-label="Social media links">
+            <nav
+              className="flex items-center gap-3 flex-wrap"
+              aria-label="Social media links"
+            >
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
@@ -59,8 +73,14 @@ export default function Footer() {
           </div>
 
           {/* Column 2: Navigation Links */}
-          <nav className="flex flex-col gap-4" aria-labelledby="footer-nav-heading">
-            <h3 id="footer-nav-heading" className="text-white font-bold text-lg font-syne">
+          <nav
+            className="flex flex-col gap-4"
+            aria-labelledby="footer-nav-heading"
+          >
+            <h3
+              id="footer-nav-heading"
+              className="text-white font-bold text-lg font-syne"
+            >
               Quick Links
             </h3>
             <ul className="flex flex-col gap-3">
@@ -84,9 +104,9 @@ export default function Footer() {
             </h3>
             <p className="text-slate-400 text-sm leading-relaxed">
               PixGen is a curated gallery of stunning AI-generated artwork.
-              Explore thousands of images created by cutting-edge AI models like Stable Diffusion, Midjourney, and DALL-E,
-              discover new styles, and get inspired by the intersection of
-              technology and creativity.
+              Explore thousands of images created by cutting-edge AI models like
+              Stable Diffusion, Midjourney, and DALL-E, discover new styles, and
+              get inspired by the intersection of technology and creativity.
             </p>
           </div>
         </div>
