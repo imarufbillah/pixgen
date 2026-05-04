@@ -1,24 +1,21 @@
 // API utility functions for fetching data
+import { readFile } from "fs/promises";
+import { join } from "path";
 
 /**
- * Get the base URL for API requests
- * In production, use the Vercel URL or custom domain
- * In development, use localhost
+ * Read JSON data from the file system (server-side only)
+ * This is more reliable than fetching during build time
  */
-function getBaseUrl() {
-  // Check if we're on the server
-  if (typeof window === "undefined") {
-    // Server-side: Use Vercel URL or localhost
-    if (process.env.VERCEL_URL) {
-      return `https://${process.env.VERCEL_URL}`;
-    }
-    if (process.env.NEXT_PUBLIC_BASE_URL) {
-      return process.env.NEXT_PUBLIC_BASE_URL;
-    }
-    return "http://localhost:3000";
+async function readJsonData() {
+  try {
+    // Read from public directory
+    const filePath = join(process.cwd(), "public", "data", "images.json");
+    const fileContents = await readFile(filePath, "utf8");
+    return JSON.parse(fileContents);
+  } catch (error) {
+    console.error("Error reading JSON file:", error);
+    return { images: [], categories: ["All"] };
   }
-  // Client-side: Use current origin
-  return window.location.origin;
 }
 
 /**
@@ -27,19 +24,7 @@ function getBaseUrl() {
  */
 export async function fetchImages() {
   try {
-    const baseUrl = getBaseUrl();
-    const res = await fetch(`${baseUrl}/data/images.json`, {
-      next: { revalidate: 3600 }, // Revalidate every hour
-      cache: "force-cache",
-    });
-
-    if (!res.ok) {
-      throw new Error(
-        `Failed to fetch images: ${res.status} ${res.statusText}`,
-      );
-    }
-
-    const data = await res.json();
+    const data = await readJsonData();
     return data.images || [];
   } catch (error) {
     console.error("Error fetching images:", error);
@@ -68,19 +53,7 @@ export async function fetchImageById(id) {
  */
 export async function fetchCategories() {
   try {
-    const baseUrl = getBaseUrl();
-    const res = await fetch(`${baseUrl}/data/images.json`, {
-      next: { revalidate: 3600 }, // Revalidate every hour
-      cache: "force-cache",
-    });
-
-    if (!res.ok) {
-      throw new Error(
-        `Failed to fetch categories: ${res.status} ${res.statusText}`,
-      );
-    }
-
-    const data = await res.json();
+    const data = await readJsonData();
     return data.categories || ["All"];
   } catch (error) {
     console.error("Error fetching categories:", error);
