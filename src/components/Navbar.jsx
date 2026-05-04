@@ -179,7 +179,7 @@ export default function Navbar() {
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 z-40 bg-[#080b10] md:hidden"
+          className="fixed inset-0 z-40 bg-[#080b10] md:hidden animate-fade-in"
           id="mobile-menu"
           role="dialog"
           aria-modal="true"
@@ -188,25 +188,26 @@ export default function Navbar() {
             className="flex flex-col items-center justify-center h-full gap-8 px-8"
             aria-label="Mobile navigation"
           >
-            {navLinks.map((link) => {
+            {navLinks.map((link, index) => {
               const isActive = isActiveLink(link.href);
               return (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`text-2xl font-bold transition-colors font-syne ${
+                  className={`text-2xl font-bold transition-all duration-300 font-syne animate-slide-in-left ${
                     isActive
-                      ? "text-violet-400"
-                      : "text-white hover:text-violet-400"
+                      ? "text-violet-400 scale-110"
+                      : "text-white hover:text-violet-400 hover:scale-110"
                   }`}
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   {link.label}
                 </Link>
               );
             })}
 
-            <div className="flex flex-col gap-4 w-full max-w-xs mt-8">
+            <div className="flex flex-col gap-4 w-full max-w-xs mt-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>
               {isPending ? (
                 <div className="flex justify-center">
                   <div className="w-6 h-6 border-2 border-violet-600 border-t-transparent rounded-full animate-spin"></div>
@@ -217,7 +218,7 @@ export default function Navbar() {
                     href="/profile"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <div className="flex items-center justify-center gap-3 p-4 bg-[#0f1318] rounded-xl border border-white/10">
+                    <div className="flex items-center justify-center gap-3 p-4 bg-[#0f1318] rounded-xl border border-white/10 hover:border-violet-500/50 transition-all duration-300 hover:scale-105 active:scale-95">
                       <div className="w-12 h-12 rounded-full bg-linear-to-br from-violet-600 to-cyan-500 p-0.5">
                         {session.user?.image ? (
                           <Image
@@ -241,7 +242,7 @@ export default function Navbar() {
                   <GhostButton
                     onClick={handleLogout}
                     variant="danger"
-                    className="w-full"
+                    className="w-full hover:scale-105 active:scale-95 transition-transform duration-300"
                   >
                     Logout
                   </GhostButton>
@@ -249,10 +250,10 @@ export default function Navbar() {
               ) : (
                 <>
                   <Link href="/signin" onClick={() => setMobileMenuOpen(false)}>
-                    <GhostButton className="w-full">Sign In</GhostButton>
+                    <GhostButton className="w-full hover:scale-105 active:scale-95 transition-transform duration-300">Sign In</GhostButton>
                   </Link>
                   <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
-                    <GradientButton className="w-full">Sign Up</GradientButton>
+                    <GradientButton className="w-full hover:scale-105 active:scale-95 transition-transform duration-300">Sign Up</GradientButton>
                   </Link>
                 </>
               )}

@@ -57,14 +57,15 @@ export default function Footer() {
               className="flex items-center gap-3 flex-wrap"
               aria-label="Social media links"
             >
-              {socialLinks.map((social) => (
+              {socialLinks.map((social, index) => (
                 <a
                   key={social.label}
                   href={social.href}
                   aria-label={`Follow us on ${social.label}`}
                   rel="noopener noreferrer"
                   target="_blank"
-                  className="w-10 h-10 rounded-full bg-[#141921] border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:border-violet-500 hover:shadow-lg hover:shadow-violet-500/30 transition-all duration-300"
+                  className="w-10 h-10 rounded-full bg-[#141921] border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:border-violet-500 hover:shadow-lg hover:shadow-violet-500/30 transition-all duration-300 hover:scale-110 active:scale-95 animate-fade-in"
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <social.icon className="text-lg" />
                 </a>
@@ -85,10 +86,10 @@ export default function Footer() {
             </h3>
             <ul className="flex flex-col gap-3">
               {navLinks.map((link, index) => (
-                <li key={index}>
+                <li key={index} className="animate-fade-in" style={{ animationDelay: `${index * 0.05}s` }}>
                   <Link
                     href={link.href}
-                    className="text-slate-400 hover:text-white transition-colors duration-300 text-sm"
+                    className="text-slate-400 hover:text-white transition-all duration-300 text-sm hover:translate-x-1 inline-block"
                   >
                     {link.label}
                   </Link>

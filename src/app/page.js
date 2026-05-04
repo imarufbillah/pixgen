@@ -101,29 +101,29 @@ export default function Home() {
 
         {/* Hero Content */}
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-600/20 border border-violet-500/30 text-cyan-400 text-xs sm:text-sm font-medium mb-6 sm:mb-8 backdrop-blur-sm">
-            <Sparkles size={16} />
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-600/20 border border-violet-500/30 text-cyan-400 text-xs sm:text-sm font-medium mb-6 sm:mb-8 backdrop-blur-sm animate-fade-in-scale hover:scale-105 transition-transform duration-300 cursor-default">
+            <Sparkles size={16} className="animate-pulse" />
             <span>Powered by AI</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 sm:mb-6 font-syne">
-            <span className="text-white mb-2 block">Create. Imagine.</span>
-            <span className="bg-linear-to-r from-violet-600 to-cyan-500 bg-clip-text text-transparent block">
+            <span className="text-white mb-2 block animate-slide-in-left">Create. Imagine.</span>
+            <span className="bg-linear-to-r from-violet-600 to-cyan-500 bg-clip-text text-transparent block animate-slide-in-right animate-gradient">
               Generate.
             </span>
           </h1>
 
-          <p className="text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed px-4">
+          <p className="text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed px-4 animate-fade-in" style={{ animationDelay: '0.2s', opacity: 0, animationFillMode: 'forwards' }}>
             Explore thousands of stunning AI-generated artworks from Stable Diffusion, Midjourney, and DALL-E. Curated by style, mood, and AI model.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-4 animate-fade-in" style={{ animationDelay: '0.4s', opacity: 0, animationFillMode: 'forwards' }}>
             <Link href="/photos">
-              <GradientButton className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg">
+              <GradientButton className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg hover:scale-105 transition-transform duration-300">
                 Explore Gallery
               </GradientButton>
             </Link>
-            <GhostButton className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg">
+            <GhostButton className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg hover:scale-105 transition-transform duration-300">
               Learn More
             </GhostButton>
           </div>
@@ -167,40 +167,40 @@ export default function Home() {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-8 sm:mt-12" role="list">
-          <article className="group p-6 sm:p-8 bg-[#0f1318] rounded-2xl border border-white/10 hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/20" role="listitem">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-linear-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
+          <article className="group p-6 sm:p-8 bg-[#0f1318] rounded-2xl border border-white/10 hover:border-violet-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-violet-500/20 hover:transform hover:scale-105 cursor-default" role="listitem">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-linear-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500" aria-hidden="true">
               <Zap className="text-white" size={24} />
             </div>
-            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 font-syne">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 font-syne group-hover:text-violet-400 transition-colors duration-300">
               Lightning Fast
             </h3>
-            <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors duration-300">
               Browse thousands of AI-generated images with blazing-fast load
               times and smooth interactions.
             </p>
           </article>
 
-          <article className="group p-6 sm:p-8 bg-[#0f1318] rounded-2xl border border-white/10 hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/20" role="listitem">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-linear-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
+          <article className="group p-6 sm:p-8 bg-[#0f1318] rounded-2xl border border-white/10 hover:border-violet-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-violet-500/20 hover:transform hover:scale-105 cursor-default" role="listitem">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-linear-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500" aria-hidden="true">
               <Palette className="text-white" size={24} />
             </div>
-            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 font-syne">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 font-syne group-hover:text-violet-400 transition-colors duration-300">
               Diverse Styles
             </h3>
-            <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors duration-300">
               From cyberpunk to fantasy, abstract to photorealistic - discover
               art across every imaginable style.
             </p>
           </article>
 
-          <article className="group p-6 sm:p-8 bg-[#0f1318] rounded-2xl border border-white/10 hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/20" role="listitem">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-linear-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
+          <article className="group p-6 sm:p-8 bg-[#0f1318] rounded-2xl border border-white/10 hover:border-violet-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-violet-500/20 hover:transform hover:scale-105 cursor-default" role="listitem">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-linear-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500" aria-hidden="true">
               <TrendingUp className="text-white" size={24} />
             </div>
-            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 font-syne">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 font-syne group-hover:text-violet-400 transition-colors duration-300">
               Top Models
             </h3>
-            <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors duration-300">
               Images generated by the latest AI models including Stable
               Diffusion XL, Midjourney, and DALL-E 3.
             </p>
