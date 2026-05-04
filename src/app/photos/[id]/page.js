@@ -4,10 +4,11 @@ import { Heart, Download, Cpu, Maximize2, Calendar } from "lucide-react";
 import GradientButton from "@/components/GradientButton";
 import GhostButton from "@/components/GhostButton";
 import MetaItem from "@/components/MetaItem";
-import { images } from "@/data/images";
+import { fetchImages, fetchImageById } from "@/lib/api";
 
 // Generate static params for all images (optional but recommended for performance)
 export async function generateStaticParams() {
+  const images = await fetchImages();
   return images.map((image) => ({
     id: image.id,
   }));
@@ -17,7 +18,15 @@ export async function generateMetadata({ params }) {
   // Await params since it's a Promise in Next.js 15+
   const resolvedParams = await params;
   // Find the image based on the dynamic route parameter
-  const image = images.find((img) => img.id === resolvedParams.id) || images[0];
+  const image = await fetchImageById(resolvedParams.id);
+
+  // Fallback if image not found
+  if (!image) {
+    return {
+      title: "Image Not Found - PixGen",
+      description: "The requested image could not be found.",
+    };
+  }
 
   return {
     title: `${image.title} - AI-Generated ${image.category} Art`,
@@ -66,10 +75,11 @@ export default async function PhotoDetails({ params }) {
 
   // Find the image based on the dynamic route parameter
   const imageId = String(resolvedParams.id);
-  const image = images.find((img) => String(img.id) === imageId);
+  const image = await fetchImageById(imageId);
 
   // If image not found, show 404 or redirect
   if (!image) {
+    const allImages = await fetchImages();
     return (
       <div className="w-full min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -81,7 +91,7 @@ export default async function PhotoDetails({ params }) {
             {resolvedParams.id})
           </p>
           <p className="text-slate-500 text-sm mb-8">
-            Available IDs: {images.map((img) => img.id).join(", ")}
+            Available IDs: {allImages.map((img) => img.id).join(", ")}
           </p>
           <Link
             href="/photos"

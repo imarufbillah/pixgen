@@ -1,7 +1,10 @@
-import { images } from "@/data/images";
+import { fetchImages } from "@/lib/api";
 
-export default function sitemap() {
+export default async function sitemap() {
   const baseUrl = "https://pixgen-by-marufbillah.vercel.app";
+
+  // Fetch images for dynamic pages
+  const images = await fetchImages();
 
   // Static pages
   const staticPages = [

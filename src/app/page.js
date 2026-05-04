@@ -5,7 +5,7 @@ import GradientButton from "@/components/GradientButton";
 import GhostButton from "@/components/GhostButton";
 import SectionHeader from "@/components/SectionHeader";
 import ImageCard from "@/components/ImageCard";
-import { images } from "@/data/images";
+import { fetchTopImages } from "@/lib/api";
 
 export const metadata = {
   title: "Home - Explore AI-Generated Art Gallery",
@@ -30,8 +30,8 @@ export const metadata = {
   },
 };
 
-export default function Home() {
-  const topImages = images.slice(0, 6);
+export default async function Home() {
+  const topImages = await fetchTopImages(6);
 
   const jsonLd = {
     "@context": "https://schema.org",
