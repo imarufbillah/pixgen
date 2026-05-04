@@ -9,23 +9,33 @@ export default function Breadcrumb() {
   const pathname = usePathname();
   const [imageTitle, setImageTitle] = useState(null);
 
-  // Don't show breadcrumb on home page
-  if (pathname === "/") return null;
-
   // Check if we're on a photo detail page
   const isPhotoDetail = pathname.match(/^\/photos\/(\d+)$/);
 
   useEffect(() => {
     // Fetch image title if on photo detail page
     if (isPhotoDetail) {
-      const imageId = isPhotoDetail[1];
-      // Try to get title from the page's h1 element (already rendered)
-      const titleElement = document.querySelector("h1");
-      if (titleElement) {
-        setImageTitle(titleElement.textContent);
-      }
+      // Use setTimeout to avoid synchronous setState in effect
+      const timer = setTimeout(() => {
+        const titleElement = document.querySelector("h1");
+        if (titleElement && titleElement.textContent) {
+          setImageTitle(titleElement.textContent);
+        }
+      }, 0);
+
+      return () => clearTimeout(timer);
+    } else {
+      // Also use setTimeout for consistency
+      const timer = setTimeout(() => {
+        setImageTitle(null);
+      }, 0);
+
+      return () => clearTimeout(timer);
     }
   }, [pathname, isPhotoDetail]);
+
+  // Don't show breadcrumb on home page
+  if (pathname === "/") return null;
 
   // Generate breadcrumb items from pathname
   const pathSegments = pathname.split("/").filter(Boolean);
@@ -34,10 +44,10 @@ export default function Breadcrumb() {
     { label: "Home", href: "/" },
     ...pathSegments.map((segment, index) => {
       const href = `/${pathSegments.slice(0, index + 1).join("/")}`;
-      
+
       // Check if this is the last segment and we're on photo detail page
       const isLastSegment = index === pathSegments.length - 1;
-      
+
       // Use image title if available and this is the photo ID segment
       let label;
       if (isLastSegment && isPhotoDetail && imageTitle) {

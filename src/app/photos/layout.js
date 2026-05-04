@@ -12,7 +12,7 @@ export const metadata = {
     "abstract AI art",
     "AI portraits",
     "architecture AI art",
-    "sci-fi art"
+    "sci-fi art",
   ],
   openGraph: {
     title: "All Photos - PixGen AI Art Gallery",

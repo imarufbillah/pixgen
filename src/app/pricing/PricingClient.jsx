@@ -59,7 +59,10 @@ export default function PricingClient({ plans }) {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div className="text-center mb-12 sm:mb-16" variants={itemVariants}>
+        <motion.div
+          className="text-center mb-12 sm:mb-16"
+          variants={itemVariants}
+        >
           <SectionHeader
             title="Choose Your Plan"
             subtitle="Start free, upgrade when you need more power"
@@ -132,7 +135,9 @@ export default function PricingClient({ plans }) {
                           }`}
                           size={16}
                         />
-                        <span className="text-slate-300 text-sm">{feature}</span>
+                        <span className="text-slate-300 text-sm">
+                          {feature}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -173,8 +178,8 @@ export default function PricingClient({ plans }) {
                   Can I change plans anytime?
                 </h3>
                 <p className="text-slate-400 text-sm">
-                  Yes! You can upgrade or downgrade your plan at any time. Changes
-                  take effect immediately.
+                  Yes! You can upgrade or downgrade your plan at any time.
+                  Changes take effect immediately.
                 </p>
               </motion.div>
               <motion.div variants={faqVariants}>
@@ -211,8 +216,8 @@ export default function PricingClient({ plans }) {
                   Can I use images commercially?
                 </h3>
                 <p className="text-slate-400 text-sm">
-                  Pro and Enterprise plans include commercial licensing. Free plan
-                  is for personal use only.
+                  Pro and Enterprise plans include commercial licensing. Free
+                  plan is for personal use only.
                 </p>
               </motion.div>
               <motion.div variants={faqVariants}>
@@ -220,8 +225,8 @@ export default function PricingClient({ plans }) {
                   Is there an API available?
                 </h3>
                 <p className="text-slate-400 text-sm">
-                  API access is included with Enterprise plans. Contact our sales
-                  team for custom API solutions.
+                  API access is included with Enterprise plans. Contact our
+                  sales team for custom API solutions.
                 </p>
               </motion.div>
             </motion.div>

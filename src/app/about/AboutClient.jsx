@@ -73,7 +73,10 @@ export default function AboutClient() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Section */}
-        <motion.div className="text-center mb-16 sm:mb-20" variants={itemVariants}>
+        <motion.div
+          className="text-center mb-16 sm:mb-20"
+          variants={itemVariants}
+        >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-600/20 border border-violet-500/30 text-cyan-400 text-sm font-medium mb-6 backdrop-blur-sm">
             <Sparkles size={16} />
             <span>About PixGen</span>
@@ -85,9 +88,9 @@ export default function AboutClient() {
             </span>
           </h1>
           <p className="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            PixGen is on a mission to make AI-generated art accessible to everyone.
-            We're building the ultimate platform for exploring, creating, and sharing
-            stunning AI artwork.
+            PixGen is on a mission to make AI-generated art accessible to
+            everyone. We&apos;re building the ultimate platform for exploring,
+            creating, and sharing stunning AI artwork.
           </p>
         </motion.div>
 
@@ -123,9 +126,10 @@ export default function AboutClient() {
               Our Mission
             </h2>
             <p className="text-slate-400 leading-relaxed">
-              To empower creators worldwide with cutting-edge AI technology, making
-              professional-quality art generation accessible to everyone. We believe
-              that AI should augment human creativity, not replace it.
+              To empower creators worldwide with cutting-edge AI technology,
+              making professional-quality art generation accessible to everyone.
+              We believe that AI should augment human creativity, not replace
+              it.
             </p>
           </motion.div>
 
@@ -140,9 +144,10 @@ export default function AboutClient() {
               Our Vision
             </h2>
             <p className="text-slate-400 leading-relaxed">
-              To become the world's leading platform for AI art, fostering a global
-              community of creators who push the boundaries of what's possible with
-              artificial intelligence and human imagination.
+              To become the world&apos;s leading platform for AI art, fostering
+              a global community of creators who push the boundaries of
+              what&apos;s possible with artificial intelligence and human
+              imagination.
             </p>
           </motion.div>
         </div>
@@ -195,26 +200,27 @@ export default function AboutClient() {
           <div className="space-y-6 text-slate-400 leading-relaxed">
             <p>
               PixGen was born from a simple observation: AI image generation was
-              becoming incredibly powerful, but the tools were scattered, complex,
-              and often inaccessible to everyday creators.
+              becoming incredibly powerful, but the tools were scattered,
+              complex, and often inaccessible to everyday creators.
             </p>
             <p>
               In 2024, our founder Maruf Billah set out to change that. With a
-              background in software engineering and a passion for digital art, he
-              envisioned a platform that would make AI art generation as simple as
-              browsing a photo gallery.
+              background in software engineering and a passion for digital art,
+              he envisioned a platform that would make AI art generation as
+              simple as browsing a photo gallery.
             </p>
             <p>
-              Today, PixGen serves thousands of creators worldwide, from hobbyists
-              exploring AI for the first time to professional artists using our
-              platform for commercial projects. We've built integrations with the
-              leading AI models including Stable Diffusion, Midjourney, and DALL-E,
-              giving our users access to the best technology available.
+              Today, PixGen serves thousands of creators worldwide, from
+              hobbyists exploring AI for the first time to professional artists
+              using our platform for commercial projects. We&apos;ve built
+              integrations with the leading AI models including Stable
+              Diffusion, Midjourney, and DALL-E, giving our users access to the
+              best technology available.
             </p>
             <p>
-              But we're just getting started. Our roadmap includes custom model
-              training, collaborative features, and tools that will push the
-              boundaries of what's possible with AI-generated art.
+              But we&apos;re just getting started. Our roadmap includes custom
+              model training, collaborative features, and tools that will push
+              the boundaries of what&apos;s possible with AI-generated art.
             </p>
           </div>
         </motion.div>
@@ -228,7 +234,8 @@ export default function AboutClient() {
             Join Our Community
           </h2>
           <p className="text-slate-400 mb-8 max-w-2xl mx-auto">
-            Be part of the AI art revolution. Start creating stunning artwork today.
+            Be part of the AI art revolution. Start creating stunning artwork
+            today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/signup">

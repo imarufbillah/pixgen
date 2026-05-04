@@ -5,7 +5,9 @@ export default function MetaItem({ icon: Icon, label, value }) {
         <Icon size={18} />
       </div>
       <div className="flex flex-col min-w-0">
-        <span className="text-xs text-slate-500 group-hover:text-slate-400 transition-colors duration-300">{label}</span>
+        <span className="text-xs text-slate-500 group-hover:text-slate-400 transition-colors duration-300">
+          {label}
+        </span>
         <span className="text-xs sm:text-sm font-medium text-white truncate group-hover:text-violet-400 transition-colors duration-300">
           {value}
         </span>

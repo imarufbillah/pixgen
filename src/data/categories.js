@@ -3,48 +3,48 @@ export const categories = [
   {
     id: 1,
     name: "Sci-Fi",
-    slug: "scifi"
+    slug: "scifi",
   },
   {
     id: 2,
     name: "Pixel Art",
-    slug: "pixel-art"
+    slug: "pixel-art",
   },
   {
     id: 3,
     name: "Fantasy",
-    slug: "fantasy"
+    slug: "fantasy",
   },
   {
     id: 4,
     name: "Cyberpunk",
-    slug: "cyberpunk"
+    slug: "cyberpunk",
   },
   {
     id: 5,
     name: "Surreal",
-    slug: "surreal"
+    slug: "surreal",
   },
   {
     id: 6,
     name: "Vaporwave",
-    slug: "vaporwave"
+    slug: "vaporwave",
   },
   {
     id: 7,
     name: "Realistic",
-    slug: "realistic"
+    slug: "realistic",
   },
   {
     id: 8,
     name: "Minimal",
-    slug: "minimal"
+    slug: "minimal",
   },
   {
     id: 9,
     name: "Steampunk",
-    slug: "steampunk"
-  }
+    slug: "steampunk",
+  },
 ];
 
 // Category names for filtering (includes "All" option)
@@ -58,5 +58,5 @@ export const categoryNames = [
   "Vaporwave",
   "Realistic",
   "Minimal",
-  "Steampunk"
+  "Steampunk",
 ];

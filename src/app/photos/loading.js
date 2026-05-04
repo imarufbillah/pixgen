@@ -1,4 +1,4 @@
-import GallerySkeleton from '@/components/skeletons/GallerySkeleton';
+import GallerySkeleton from "@/components/skeletons/GallerySkeleton";
 
 export default function Loading() {
   return <GallerySkeleton count={9} />;

@@ -12,11 +12,7 @@ import { authClient } from "@/app/lib/auth-client";
  * @returns {Object} - OAuth handler function and loading state
  */
 export function useOAuth(options = {}) {
-  const {
-    redirectTo = "/",
-    onSuccess,
-    onError,
-  } = options;
+  const { redirectTo = "/", onSuccess, onError } = options;
 
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -60,7 +56,7 @@ export function useOAuth(options = {}) {
       }
     } catch (error) {
       console.error(`OAuth sign in error (${provider}):`, error);
-      
+
       // More detailed error logging for debugging
       if (error.message) {
         console.error("Error message:", error.message);
@@ -68,7 +64,7 @@ export function useOAuth(options = {}) {
       if (error.response) {
         console.error("Error response:", error.response);
       }
-      
+
       toast.error("Authentication failed", {
         description: "An unexpected error occurred. Please try again.",
       });

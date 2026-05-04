@@ -9,10 +9,7 @@ function BasicExample() {
   const { signInWithOAuth, isLoading } = useOAuth();
 
   return (
-    <button 
-      onClick={() => signInWithOAuth("google")}
-      disabled={isLoading}
-    >
+    <button onClick={() => signInWithOAuth("google")} disabled={isLoading}>
       {isLoading ? "Signing in..." : "Sign in with Google"}
     </button>
   );
@@ -60,24 +57,15 @@ function MultipleProvidersExample() {
 
   return (
     <div>
-      <button 
-        onClick={() => signInWithOAuth("google")}
-        disabled={isLoading}
-      >
+      <button onClick={() => signInWithOAuth("google")} disabled={isLoading}>
         Sign in with Google
       </button>
-      
-      <button 
-        onClick={() => signInWithOAuth("github")}
-        disabled={isLoading}
-      >
+
+      <button onClick={() => signInWithOAuth("github")} disabled={isLoading}>
         Sign in with GitHub
       </button>
-      
-      <button 
-        onClick={() => signInWithOAuth("facebook")}
-        disabled={isLoading}
-      >
+
+      <button onClick={() => signInWithOAuth("facebook")} disabled={isLoading}>
         Sign in with Facebook
       </button>
     </div>
@@ -90,7 +78,7 @@ function AsyncExample() {
 
   const handleSignIn = async () => {
     const result = await signInWithOAuth("google");
-    
+
     if (result.success) {
       console.log("Successfully signed in:", result.data);
     } else {
@@ -98,9 +86,5 @@ function AsyncExample() {
     }
   };
 
-  return (
-    <button onClick={handleSignIn}>
-      Sign in with Google
-    </button>
-  );
+  return <button onClick={handleSignIn}>Sign in with Google</button>;
 }

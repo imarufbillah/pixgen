@@ -8,7 +8,7 @@ export default function PricingSkeleton() {
             <div className="h-10 bg-white/10 rounded w-64 mx-auto mb-4 skeleton" />
             <div className="h-6 bg-white/10 rounded w-96 max-w-full mx-auto skeleton" />
           </div>
-          <div className="h-5 bg-white/10 rounded w-[600px] max-w-full mx-auto skeleton" />
+          <div className="h-5 bg-white/10 rounded w-150 max-w-full mx-auto skeleton" />
         </div>
 
         {/* Pricing Cards Skeleton */}
@@ -20,20 +20,20 @@ export default function PricingSkeleton() {
             >
               {/* Icon skeleton */}
               <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white/10 skeleton" />
-              
+
               {/* Title skeleton */}
               <div className="h-8 bg-white/10 rounded w-32 mx-auto mb-2 skeleton" />
-              
+
               {/* Description skeleton */}
               <div className="h-4 bg-white/10 rounded w-full mx-auto mb-4 skeleton" />
-              
+
               {/* Price skeleton */}
               <div className="mb-4">
                 <div className="h-12 bg-white/10 rounded w-40 mx-auto mb-2 skeleton" />
               </div>
 
               {/* Features skeleton */}
-              <div className="mb-8 flex-grow">
+              <div className="mb-8 grow">
                 <div className="space-y-3">
                   {[1, 2, 3, 4, 5, 6].map((j) => (
                     <div key={j} className="flex items-start gap-3">
