@@ -21,7 +21,7 @@ export default function SignUp() {
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   // Use the reusable OAuth hook
   const { signInWithOAuth, isLoading: isOAuthLoading } = useOAuth({
     redirectTo: "/",
@@ -135,11 +135,11 @@ export default function SignUp() {
       <div className="absolute inset-0 bg-gradient-radial from-violet-900/10 via-[#080b10] to-cyan-900/10" />
 
       {/* Sign Up Card */}
-      <div className="relative z-10 w-full max-w-md mx-4 sm:mx-auto">
-        <div className="bg-[#0f1318] border border-white/10 rounded-2xl p-6 sm:p-8 shadow-2xl shadow-violet-500/10">
+      <div className="relative z-10 w-full max-w-md mx-4 sm:mx-auto animate-fade-in-scale">
+        <div className="bg-[#0f1318] border border-white/10 rounded-2xl p-6 sm:p-8 shadow-2xl shadow-violet-500/10 hover:border-violet-500/20 transition-all duration-300">
           {/* Logo */}
           <div className="flex items-center justify-center gap-2 mb-6 sm:mb-8">
-            <Sparkles className="text-violet-400" size={28} />
+            <Sparkles className="text-violet-400 animate-pulse" size={28} />
             <span className="text-2xl sm:text-3xl font-bold font-syne">
               <span className="text-white">Pix</span>
               <span className="bg-linear-to-r from-violet-600 to-cyan-500 bg-clip-text text-transparent">

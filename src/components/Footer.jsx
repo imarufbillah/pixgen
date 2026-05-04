@@ -86,7 +86,11 @@ export default function Footer() {
             </h3>
             <ul className="flex flex-col gap-3">
               {navLinks.map((link, index) => (
-                <li key={index} className="animate-fade-in" style={{ animationDelay: `${index * 0.05}s` }}>
+                <li
+                  key={index}
+                  className="animate-fade-in"
+                  style={{ animationDelay: `${index * 0.05}s` }}
+                >
                   <Link
                     href={link.href}
                     className="text-slate-400 hover:text-white transition-all duration-300 text-sm hover:translate-x-1 inline-block"

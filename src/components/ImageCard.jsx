@@ -10,26 +10,24 @@ export default function ImageCard({ image }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <Link 
-      href={`/photos/${image.id}`} 
+    <Link
+      href={`/photos/${image.id}`}
       aria-label={`View details of ${image.title}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="group relative aspect-4/3 rounded-xl overflow-hidden border border-white/10 bg-[#0f1318] transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-violet-500/20 hover:border-violet-500/30">
         {/* Skeleton loader */}
-        {!imageLoaded && (
-          <div className="absolute inset-0 skeleton" />
-        )}
-        
+        {!imageLoaded && <div className="absolute inset-0 skeleton" />}
+
         <Image
           src={image.imageUrl}
           alt={`${image.title} - ${image.category} AI art`}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
           className={`object-cover transition-all duration-700 ${
-            imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
-          } ${isHovered ? 'scale-110' : 'scale-100'}`}
+            imageLoaded ? "opacity-100 scale-100" : "opacity-0 scale-105"
+          } ${isHovered ? "scale-110" : "scale-100"}`}
           loading="lazy"
           onLoad={() => setImageLoaded(true)}
         />
@@ -38,13 +36,15 @@ export default function ImageCard({ image }) {
         <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
 
         {/* Hover Overlay Content */}
-        <div className={`absolute inset-0 transition-all duration-300 ${
-          isHovered ? 'opacity-100' : 'opacity-0'
-        }`}>
+        <div
+          className={`absolute inset-0 transition-all duration-300 ${
+            isHovered ? "opacity-100" : "opacity-0"
+          }`}
+        >
           <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
             <div className="flex items-start justify-between mb-2 sm:mb-3">
               <div className="flex-1">
-                <h3 className="text-white font-bold text-base sm:text-lg mb-1 sm:mb-2 font-syne line-clamp-1 transform translate-x-[-10px] group-hover:translate-x-0 transition-transform duration-300">
+                <h3 className="text-white font-bold text-base sm:text-lg mb-1 sm:mb-2 font-syne line-clamp-1 transform -translate-x-2.5 group-hover:translate-x-0 transition-transform duration-300">
                   {image.title}
                 </h3>
                 <span className="inline-block px-2 sm:px-3 py-1 rounded-full text-xs font-medium bg-violet-600/40 text-cyan-300 backdrop-blur-sm border border-violet-500/30 transform scale-95 group-hover:scale-100 transition-transform duration-300">

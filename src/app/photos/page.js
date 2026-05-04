@@ -12,9 +12,10 @@ export default function AllPhotos() {
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   // Filter images based on selected category
-  const filteredImages = activeCategory === "All" 
-    ? images 
-    : images.filter(image => image.category === activeCategory);
+  const filteredImages =
+    activeCategory === "All"
+      ? images
+      : images.filter((image) => image.category === activeCategory);
 
   // Get count for current category
   const imageCount = filteredImages.length;
@@ -36,17 +37,26 @@ export default function AllPhotos() {
         <header className="mb-8 sm:mb-12 animate-fade-in">
           <SectionHeader
             title="All Photos"
-            subtitle={`Discover AI-generated art across every style and category • ${imageCount} ${imageCount === 1 ? 'image' : 'images'} ${activeCategory !== "All" ? `in ${activeCategory}` : 'total'}`}
+            subtitle={`Discover AI-generated art across every style and category • ${imageCount} ${imageCount === 1 ? "image" : "images"} ${activeCategory !== "All" ? `in ${activeCategory}` : "total"}`}
           />
         </header>
 
         {/* Filter Bar */}
-        <nav className="mb-8 sm:mb-12 overflow-x-auto pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 animate-fade-in" aria-label="Category filters" style={{ animationDelay: '0.1s' }}>
+        <nav
+          className="mb-8 sm:mb-12 overflow-hidden pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 animate-fade-in"
+          aria-label="Category filters"
+          style={{ animationDelay: "0.1s" }}
+        >
           <div className="flex items-center gap-3 mb-3">
             <Filter size={18} className="text-violet-400" />
-            <span className="text-sm text-slate-400 font-medium">Filter by category:</span>
+            <span className="text-sm text-slate-400 font-medium">
+              Filter by category:
+            </span>
           </div>
-          <div className="flex gap-2 sm:gap-3 min-w-max sm:min-w-0 sm:flex-wrap" role="group">
+          <div
+            className="flex gap-2 sm:gap-3 min-w-max sm:min-w-0 sm:flex-wrap"
+            role="group"
+          >
             {categories.map((category, index) => (
               <div
                 key={category}
@@ -65,16 +75,16 @@ export default function AllPhotos() {
         </nav>
 
         {/* Photo Grid */}
-        <div 
+        <div
           className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 transition-all duration-300 ${
-            isTransitioning ? 'opacity-50 scale-95' : 'opacity-100 scale-100'
-          }`} 
+            isTransitioning ? "opacity-50 scale-95" : "opacity-100 scale-100"
+          }`}
           role="list"
         >
           {filteredImages.length > 0 ? (
             filteredImages.map((image, index) => (
-              <article 
-                key={image.id} 
+              <article
+                key={image.id}
                 role="listitem"
                 className="animate-fade-in"
                 style={{ animationDelay: `${index * 0.05}s` }}
@@ -85,14 +95,14 @@ export default function AllPhotos() {
           ) : (
             <div className="col-span-full text-center py-12 animate-fade-in-scale">
               <div className="max-w-md mx-auto">
-                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-violet-600/20 to-cyan-500/20 flex items-center justify-center border border-violet-500/30">
+                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-linear-to-br from-violet-600/20 to-cyan-500/20 flex items-center justify-center border border-violet-500/30">
                   <span className="text-4xl">🎨</span>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3 font-syne">
                   No images found
                 </h3>
                 <p className="text-slate-400 text-base mb-4">
-                  No images found in the "{activeCategory}" category.
+                  No images found in the &quot;{activeCategory}&quot; category.
                 </p>
                 <p className="text-slate-500 text-sm mb-6">
                   Try selecting a different category or view all images.

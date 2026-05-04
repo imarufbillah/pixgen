@@ -137,9 +137,24 @@ export default function RootLayout({ children }) {
             toastOptions={{
               style: {
                 background: "#0f1318",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
+                border: "1px solid rgba(139, 92, 246, 0.3)",
                 color: "#f1f5f9",
+                borderRadius: "12px",
+                padding: "16px",
               },
+              success: {
+                iconTheme: {
+                  primary: "#8b5cf6",
+                  secondary: "#f1f5f9",
+                },
+              },
+              error: {
+                iconTheme: {
+                  primary: "#ef4444",
+                  secondary: "#f1f5f9",
+                },
+              },
+              duration: 4000,
             }}
           />
         </SessionProvider>

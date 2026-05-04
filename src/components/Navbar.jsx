@@ -207,7 +207,10 @@ export default function Navbar() {
               );
             })}
 
-            <div className="flex flex-col gap-4 w-full max-w-xs mt-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            <div
+              className="flex flex-col gap-4 w-full max-w-xs mt-8 animate-fade-in"
+              style={{ animationDelay: "0.4s" }}
+            >
               {isPending ? (
                 <div className="flex justify-center">
                   <div className="w-6 h-6 border-2 border-violet-600 border-t-transparent rounded-full animate-spin"></div>
@@ -250,10 +253,14 @@ export default function Navbar() {
               ) : (
                 <>
                   <Link href="/signin" onClick={() => setMobileMenuOpen(false)}>
-                    <GhostButton className="w-full hover:scale-105 active:scale-95 transition-transform duration-300">Sign In</GhostButton>
+                    <GhostButton className="w-full hover:scale-105 active:scale-95 transition-transform duration-300">
+                      Sign In
+                    </GhostButton>
                   </Link>
                   <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
-                    <GradientButton className="w-full hover:scale-105 active:scale-95 transition-transform duration-300">Sign Up</GradientButton>
+                    <GradientButton className="w-full hover:scale-105 active:scale-95 transition-transform duration-300">
+                      Sign Up
+                    </GradientButton>
                   </Link>
                 </>
               )}
