@@ -1,6 +1,25 @@
 // API utility functions for fetching data
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+/**
+ * Get the base URL for API requests
+ * In production, use the Vercel URL or custom domain
+ * In development, use localhost
+ */
+function getBaseUrl() {
+  // Check if we're on the server
+  if (typeof window === "undefined") {
+    // Server-side: Use Vercel URL or localhost
+    if (process.env.VERCEL_URL) {
+      return `https://${process.env.VERCEL_URL}`;
+    }
+    if (process.env.NEXT_PUBLIC_BASE_URL) {
+      return process.env.NEXT_PUBLIC_BASE_URL;
+    }
+    return "http://localhost:3000";
+  }
+  // Client-side: Use current origin
+  return window.location.origin;
+}
 
 /**
  * Fetch all images from the JSON file
@@ -8,12 +27,16 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
  */
 export async function fetchImages() {
   try {
-    const res = await fetch(`${BASE_URL}/data/images.json`, {
+    const baseUrl = getBaseUrl();
+    const res = await fetch(`${baseUrl}/data/images.json`, {
       next: { revalidate: 3600 }, // Revalidate every hour
+      cache: "force-cache",
     });
 
     if (!res.ok) {
-      throw new Error("Failed to fetch images");
+      throw new Error(
+        `Failed to fetch images: ${res.status} ${res.statusText}`,
+      );
     }
 
     const data = await res.json();
@@ -45,12 +68,16 @@ export async function fetchImageById(id) {
  */
 export async function fetchCategories() {
   try {
-    const res = await fetch(`${BASE_URL}/data/images.json`, {
+    const baseUrl = getBaseUrl();
+    const res = await fetch(`${baseUrl}/data/images.json`, {
       next: { revalidate: 3600 }, // Revalidate every hour
+      cache: "force-cache",
     });
 
     if (!res.ok) {
-      throw new Error("Failed to fetch categories");
+      throw new Error(
+        `Failed to fetch categories: ${res.status} ${res.statusText}`,
+      );
     }
 
     const data = await res.json();
