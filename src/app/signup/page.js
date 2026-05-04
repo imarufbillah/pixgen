@@ -132,7 +132,7 @@ export default function SignUp() {
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden grain-texture py-12">
       {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-radial from-violet-900/10 via-[#080b10] to-cyan-900/10" />
+      <div className="absolute inset-0 bg-linear-radial from-violet-900/10 via-[#080b10] to-cyan-900/10" />
 
       {/* Sign Up Card */}
       <div className="relative z-10 w-full max-w-md mx-4 sm:mx-auto animate-fade-in-scale">

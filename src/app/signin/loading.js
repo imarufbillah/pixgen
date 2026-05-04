@@ -2,7 +2,7 @@ export default function Loading() {
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden grain-texture">
       {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-radial from-violet-900/10 via-[#080b10] to-cyan-900/10" />
+      <div className="absolute inset-0 bg-linear-radial from-violet-900/10 via-[#080b10] to-cyan-900/10" />
 
       {/* Sign In Card Skeleton */}
       <div className="relative z-10 w-full max-w-md mx-4 sm:mx-auto">
@@ -40,7 +40,7 @@ export default function Loading() {
             </div>
 
             {/* Submit button */}
-            <div className="h-12 bg-gradient-to-r from-violet-600/20 to-cyan-500/20 rounded-full mt-2 skeleton" />
+            <div className="h-12 bg-linear-to-r from-violet-600/20 to-cyan-500/20 rounded-full mt-2 skeleton" />
           </div>
 
           {/* Divider */}

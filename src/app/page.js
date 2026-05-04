@@ -60,7 +60,7 @@ export default function Home() {
           aria-label="Hero section"
         >
           {/* Gradient Background */}
-          <div className="absolute inset-0 bg-gradient-radial from-violet-900/20 via-[#080b10] to-cyan-900/20" />
+          <div className="absolute inset-0 bg-linear-radial from-violet-900/20 via-[#080b10] to-cyan-900/20" />
 
           {/* Floating Images */}
           <div

@@ -9,12 +9,18 @@ import { toast } from "sonner";
 import GradientButton from "./GradientButton";
 import GhostButton from "./GhostButton";
 import Image from "next/image";
+import NavbarSkeleton from "./skeletons/NavbarSkeleton";
 
 export default function Navbar() {
   const router = useRouter();
   const { session, isPending, signOut } = useSession();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+
+  // Show skeleton while session is loading
+  if (isPending) {
+    return <NavbarSkeleton />;
+  }
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -111,9 +117,7 @@ export default function Navbar() {
 
             {/* Desktop Auth Buttons */}
             <div className="hidden md:flex items-center gap-3 lg:gap-4">
-              {isPending ? (
-                <div className="w-6 h-6 border-2 border-violet-600 border-t-transparent rounded-full animate-spin"></div>
-              ) : session ? (
+              {session ? (
                 <>
                   <Link
                     href="/profile"
@@ -211,11 +215,7 @@ export default function Navbar() {
               className="flex flex-col gap-4 w-full max-w-xs mt-8 animate-fade-in"
               style={{ animationDelay: "0.4s" }}
             >
-              {isPending ? (
-                <div className="flex justify-center">
-                  <div className="w-6 h-6 border-2 border-violet-600 border-t-transparent rounded-full animate-spin"></div>
-                </div>
-              ) : session ? (
+              {session ? (
                 <>
                   <Link
                     href="/profile"

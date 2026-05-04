@@ -1,4 +1,4 @@
-import ImageCardSkeleton from './ImageCardSkeleton';
+import ImageCardSkeleton from "./ImageCardSkeleton";
 
 export default function GallerySkeleton({ count = 6 }) {
   return (
@@ -8,7 +8,7 @@ export default function GallerySkeleton({ count = 6 }) {
         <header className="mb-8 sm:mb-12">
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2 sm:gap-3">
-              <div className="w-1 h-6 sm:h-8 bg-gradient-to-b from-violet-600 to-cyan-500 rounded-full" />
+              <div className="w-1 h-6 sm:h-8 bg-linear-to-b from-violet-600 to-cyan-500 rounded-full" />
               <div className="h-8 sm:h-10 bg-white/10 rounded w-48 skeleton" />
             </div>
             <div className="h-5 bg-white/10 rounded w-96 max-w-full ml-5 sm:ml-7 skeleton" />
@@ -23,7 +23,10 @@ export default function GallerySkeleton({ count = 6 }) {
           </div>
           <div className="flex gap-2 sm:gap-3 min-w-max sm:min-w-0 sm:flex-wrap">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-              <div key={i} className="h-8 bg-white/10 rounded-full w-24 skeleton" />
+              <div
+                key={i}
+                className="h-8 bg-white/10 rounded-full w-24 skeleton"
+              />
             ))}
           </div>
         </nav>
