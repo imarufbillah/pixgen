@@ -1,10 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
-import { Heart, Download, Cpu, Maximize2, Calendar } from "lucide-react";
-import GradientButton from "@/components/GradientButton";
-import GhostButton from "@/components/GhostButton";
-import MetaItem from "@/components/MetaItem";
 import { fetchImages, fetchImageById } from "@/lib/api";
+import PhotoDetailClient from "./PhotoDetailClient";
 
 // Generate static params for all images (optional but recommended for performance)
 export async function generateStaticParams() {
@@ -156,127 +152,7 @@ export default async function PhotoDetails({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <article className="w-full min-h-screen py-8 sm:py-12 animate-fade-in">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
-            {/* Left Column - Image */}
-            <figure className="relative aspect-4/3 rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-violet-500/10 group animate-fade-in-scale">
-              <Image
-                src={image.imageUrl}
-                alt={`${image.title} - ${image.category} AI art generated with ${image.model}`}
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                priority
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </figure>
-
-            {/* Right Column - Details */}
-            <div className="flex flex-col gap-4 sm:gap-6">
-              {/* Category Badge */}
-              <div className="animate-slide-in-right">
-                <span className="inline-block px-4 py-2 rounded-full text-sm font-medium bg-violet-600/20 text-cyan-400 border border-violet-500/30 hover:scale-105 transition-transform duration-300 cursor-default">
-                  {image.category}
-                </span>
-              </div>
-
-              {/* Title */}
-              <h1
-                className="text-3xl sm:text-4xl md:text-5xl font-bold text-white font-syne animate-slide-in-right hover:text-violet-400 transition-colors duration-300"
-                style={{ animationDelay: "0.1s" }}
-              >
-                {image.title}
-              </h1>
-
-              {/* Prompt Section */}
-              <div
-                className="flex flex-col gap-3 animate-fade-in"
-                style={{ animationDelay: "0.2s" }}
-              >
-                <h2 className="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-2">
-                  <span className="w-1 h-4 bg-violet-500 rounded-full" />
-                  Prompt
-                </h2>
-                <div className="p-3 sm:p-4 bg-[#0f1318] border border-white/10 rounded-lg hover:border-violet-500/30 transition-all duration-300 group">
-                  <p className="text-xs sm:text-sm text-slate-300 font-mono leading-relaxed group-hover:text-white transition-colors duration-300">
-                    {image.prompt}
-                  </p>
-                </div>
-              </div>
-
-              {/* Meta Grid */}
-              <div
-                className="grid grid-cols-2 gap-3 sm:gap-4 animate-fade-in"
-                style={{ animationDelay: "0.3s" }}
-              >
-                <MetaItem icon={Cpu} label="Model" value={image.model} />
-                <MetaItem
-                  icon={Maximize2}
-                  label="Resolution"
-                  value={image.resolution}
-                />
-                <MetaItem
-                  icon={Heart}
-                  label="Likes"
-                  value={image.likes.toLocaleString()}
-                />
-                <MetaItem
-                  icon={Download}
-                  label="Downloads"
-                  value={image.downloads.toLocaleString()}
-                />
-                <MetaItem
-                  icon={Calendar}
-                  label="Created"
-                  value={new Date(image.createdAt).toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
-                />
-              </div>
-
-              {/* Tags */}
-              <div
-                className="flex flex-col gap-3 animate-fade-in"
-                style={{ animationDelay: "0.4s" }}
-              >
-                <h2 className="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-2">
-                  <span className="w-1 h-4 bg-cyan-500 rounded-full" />
-                  Tags
-                </h2>
-                <div className="flex flex-wrap gap-2">
-                  {image.tags.map((tag, index) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 rounded-full text-xs sm:text-sm border border-white/20 text-slate-300 hover:border-violet-500/50 hover:text-white hover:scale-105 transition-all duration-300 cursor-pointer animate-fade-in"
-                      style={{ animationDelay: `${0.05 * index}s` }}
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div
-                className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-2 sm:mt-4 animate-fade-in"
-                style={{ animationDelay: "0.5s" }}
-              >
-                <GhostButton className="flex-1">
-                  <Heart size={18} />
-                  <span>Like</span>
-                </GhostButton>
-                <GradientButton className="flex-1">
-                  <Download size={18} />
-                  <span>Download</span>
-                </GradientButton>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
+      <PhotoDetailClient image={image} />
     </>
   );
 }
