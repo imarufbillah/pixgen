@@ -1,294 +1,129 @@
-# PixGen - AI Image Generation Gallery 🎨
+# PixGen 🎨
 
-A stunning, dark-themed UI showcase for an AI image generation gallery platform. Built with Next.js 16, Tailwind CSS, and React with comprehensive SEO optimizations.
+> A modern AI image generation gallery platform built with Next.js, featuring user authentication, dynamic filtering, and smooth animations.
 
-![PixGen Preview](https://img.shields.io/badge/Next.js-16.2.4-black?style=for-the-badge&logo=next.js)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38bdf8?style=for-the-badge&logo=tailwind-css)
-![React](https://img.shields.io/badge/React-19-61dafb?style=for-the-badge&logo=react)
-![SEO](https://img.shields.io/badge/SEO-Optimized-success?style=for-the-badge)
+[![Next.js](https://img.shields.io/badge/Next.js-16.2.4-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19.2.4-blue?style=flat-square&logo=react)](https://reactjs.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38bdf8?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=flat-square&logo=mongodb)](https://www.mongodb.com/)
+
+## 📸 Live Demo
+
+**[View Live Demo →](https://pixgen-by-marufbillah.vercel.app)**
 
 ## ✨ Features
 
-- 🌑 **Dark, cinematic design** - Premium aesthetic with violet-to-cyan gradients
-- 🎭 **Smooth animations** - Floating elements, hover effects, and transitions
-- 📱 **Fully responsive** - Mobile-first design with adaptive layouts
-- 🔍 **SEO Optimized** - Comprehensive metadata, structured data, and semantic HTML
-- ♿ **Accessible** - WCAG compliant with ARIA labels and keyboard navigation
-- 🎨 **Design-only** - Pure UI showcase with no backend logic
-- ⚡ **Fast & modern** - Built with Next.js 16 App Router and Tailwind CSS 4
+- 🎨 **AI Image Gallery** - Curated collection of AI-generated artwork
+- 🔍 **Smart Filtering** - Category-based filtering with smooth animations
+- 🔐 **Authentication** - Email/password and Google OAuth integration
+- 👤 **User Profiles** - Editable user profiles with image upload
+- 🎭 **Smooth Animations** - Framer Motion powered transitions
+- 📱 **Responsive Design** - Mobile-first approach with Tailwind CSS
+- 🌙 **Dark Theme** - Beautiful dark UI with gradient accents
+- ⚡ **Performance Optimized** - Next.js App Router with SSR/SSG
+- 🔒 **Secure** - Security headers and environment-based configuration
+- 🎯 **SEO Friendly** - Dynamic metadata, sitemap, and structured data
 
-## 🚀 Quick Start
+## 🚀 Tech Stack
 
-```bash
-# Install dependencies
-npm install
+### Frontend
+- **Framework:** Next.js 16.2.4 (App Router)
+- **UI Library:** React 19.2.4
+- **Styling:** Tailwind CSS 4
+- **Animations:** Framer Motion 12.38.0
+- **Icons:** Lucide React, React Icons
+- **Notifications:** Sonner
 
-# Set up environment variables
-cp .env.example .env
-# Edit .env with your configuration
+### Backend
+- **API Routes:** Next.js API Routes
+- **Authentication:** Better-Auth 1.6.9
+- **Database:** MongoDB Atlas
+- **Database Adapter:** Better-Auth MongoDB Adapter
 
-# Run development server
-npm run dev
+### Development
+- **Language:** JavaScript (ES6+)
+- **Linting:** ESLint
+- **Package Manager:** npm
 
-# Build for production
-npm run build
-npm start
-```
-
-Open [http://localhost:3000](http://localhost:3000) to view the app.
-
-## 🔐 Environment Variables
-
-Create a `.env` file in the root directory with the following variables:
-
-```env
-# BetterAuth Configuration
-BETTER_AUTH_SECRET=your-secret-key-here
-BETTER_AUTH_URL=http://localhost:3000
-NEXT_PUBLIC_BETTER_AUTH_URL=http://localhost:3000
-
-# Base URL (Important for production)
-NEXT_PUBLIC_BASE_URL=https://pixgen-by-marufbillah.vercel.app
-
-# MongoDB Connection
-MONGODB_URI=your-mongodb-connection-string
-
-# Google OAuth (Optional)
-GOOGLE_CLIENT_ID=your-google-client-id
-GOOGLE_CLIENT_SECRET=your-google-client-secret
-```
-
-### Production Deployment on Vercel
-
-When deploying to Vercel, make sure to set these environment variables in your Vercel project settings:
-
-1. Go to your Vercel project dashboard
-2. Navigate to **Settings** → **Environment Variables**
-3. Add the following variables:
-   - `BETTER_AUTH_SECRET` - Generate a secure random string
-   - `BETTER_AUTH_URL` - Your production domain (e.g., `https://pixgen-by-marufbillah.vercel.app`)
-   - `NEXT_PUBLIC_BETTER_AUTH_URL` - Same as above
-   - `NEXT_PUBLIC_BASE_URL` - Your production domain
-   - `MONGODB_URI` - Your MongoDB connection string
-   - `GOOGLE_CLIENT_ID` - (Optional) Your Google OAuth client ID
-   - `GOOGLE_CLIENT_SECRET` - (Optional) Your Google OAuth client secret
-
-4. Redeploy your application after setting environment variables
-
-## 📄 Pages
-
-- **Home** (`/`) - Hero section with animated background + featured images
-- **All Photos** (`/photos`) - Gallery grid with category filters
-- **Photo Details** (`/photos/[id]`) - Detailed view with metadata
-- **Sign In** (`/signin`) - Authentication UI (design only)
-- **Sign Up** (`/signup`) - Registration UI (design only)
-- **Profile** (`/profile`) - User profile with edit mode
-
-## 🔍 SEO Features
-
-### Metadata & Tags
-- ✅ Comprehensive meta tags (title, description, keywords)
-- ✅ Open Graph tags for social media sharing
-- ✅ Twitter Card support
-- ✅ Dynamic metadata for photo pages
-- ✅ Canonical URLs
-
-### Structured Data (JSON-LD)
-- ✅ WebSite schema with search action
-- ✅ CollectionPage schema for gallery
-- ✅ ImageObject schema for photos
-- ✅ Organization schema in footer
-
-### Technical SEO
-- ✅ Dynamic sitemap generation (`/sitemap.xml`)
-- ✅ Robots.txt configuration
-- ✅ Web app manifest for PWA
-- ✅ Semantic HTML5 elements
-- ✅ ARIA labels for accessibility
-- ✅ Image optimization with Next.js Image
-
-**See [SEO_IMPLEMENTATION.md](./SEO_IMPLEMENTATION.md) for complete documentation.**
-
-## 🎨 Design System
-
-### Color Palette
-
-```css
-Background: #080b10
-Surface: #0f1318
-Accent: #7c3aed → #22d3ee (gradient)
-Text: #f1f5f9
-Muted: #64748b
-```
-
-### Typography
-
-- **Syne** - Headings and display text
-- **DM Sans** - Body and UI text
-
-## 📦 Tech Stack
-
-- Next.js 16.2.4 (App Router)
-- React 19
-- Tailwind CSS 4
-- Lucide React (icons)
-- Better Auth (Authentication)
-- MongoDB (Database)
-- Sonner (Toast notifications)
-
-## 📝 Project Structure
+## 🏗️ Project Structure
 
 ```
-src/
-├── app/              # Next.js pages & metadata
-│   ├── layout.js     # Root layout with SEO
-│   ├── page.js       # Home page
-│   ├── sitemap.js    # Dynamic sitemap
-│   ├── robots.js     # Robots configuration
-│   ├── manifest.js   # PWA manifest
-│   ├── photos/       # Gallery pages
-│   ├── profile/      # User profile
-│   ├── signin/       # Sign in page
-│   ├── signup/       # Sign up page
-│   ├── pricing/      # Pricing page
-│   └── api/          # API routes
-├── components/       # Reusable UI components
-│   └── skeletons/    # Loading skeletons
-├── contexts/         # React contexts
-├── data/             # Static data (deprecated)
-├── hooks/            # Custom React hooks
-└── lib/              # Utility functions
-    └── api.js        # Data fetching utilities
-public/
-└── data/
-    └── images.json   # Image data source
+pixgen/
+├── public/
+│   ├── data/
+│   │   └── images.json          # Image data
+│   └── robots.txt
+├── src/
+│   ├── app/
+│   │   ├── api/
+│   │   │   └── auth/[...all]/   # Better-Auth API routes
+│   │   ├── photos/              # Gallery pages
+│   │   ├── profile/             # User profile
+│   │   ├── signin/              # Sign in page
+│   │   ├── signup/              # Sign up page
+│   │   ├── pricing/             # Pricing page
+│   │   ├── layout.js            # Root layout
+│   │   ├── page.js              # Home page
+│   │   └── globals.css          # Global styles
+│   ├── components/
+│   │   ├── skeletons/           # Loading skeletons
+│   │   ├── Navbar.jsx
+│   │   ├── Footer.jsx
+│   │   ├── ImageCard.jsx
+│   │   └── ...
+│   ├── contexts/
+│   │   └── SessionContext.js    # Auth session context
+│   ├── hooks/
+│   │   └── useOAuth.js          # OAuth hook
+│   ├── lib/
+│   │   └── api.js               # API utilities
+│   └── data/
+│       └── categories.js        # Category definitions
+├── .env                         # Environment variables
+├── next.config.mjs              # Next.js configuration
+├── tailwind.config.js           # Tailwind configuration
+└── package.json
 ```
 
-## 🎯 Data Fetching
+## 🎯 Key Features Explained
 
-The application uses Next.js fetch API to load data from JSON files:
+### Authentication Flow
 
-- **Server-side fetching** with 1-hour revalidation
-- **Static generation** for photo detail pages
-- **Dynamic sitemap** generation from data
-- **Automatic URL detection** for development and production
+PixGen uses **Better-Auth** for authentication with MongoDB as the database:
 
-All data is fetched from `public/data/images.json` using utility functions in `src/lib/api.js`.
+1. **Email/Password** - Traditional registration and login
+2. **Google OAuth** - One-click social authentication
+3. **Session Management** - React Context for client-side state
+4. **Protected Routes** - Automatic redirect for unauthenticated users
 
-## 🎯 Use Cases
+### Image Gallery
 
-- Production-ready AI art gallery platform
-- Portfolio showcase for UI/UX designers
-- Design reference for AI art platforms
-- Starting point for image gallery applications
-- Learning resource for Next.js + Tailwind CSS + SEO
-- Full-stack application with authentication and database
+- **Server-Side Rendering** - Images fetched on the server for optimal performance
+- **Category Filtering** - Client-side filtering with Framer Motion animations
+- **Responsive Grid** - Adapts to screen size (1/2/3 columns)
+- **Image Cards** - Hover effects with metadata overlay
 
-## 📸 Data Management
+### Animations
 
-The application uses a JSON-based data source for images:
+Powered by **Framer Motion**:
+- Staggered entrance animations
+- Layout animations for filtering
+- Enter/exit transitions with AnimatePresence
+- Micro-interactions (hover, tap)
+- Custom easing curves for natural motion
 
-- **Location:** `public/data/images.json`
-- **Structure:** Contains 15 AI-generated image entries with metadata
-- **Categories:** Sci-Fi, Fantasy, Cyberpunk, Realistic, Minimal, Steampunk, etc.
-- **Fetching:** Server-side with Next.js fetch API and 1-hour revalidation
+## 🙏 Acknowledgments
 
-To add new images, edit `public/data/images.json` following the existing structure.
-
-## 🔧 Customization
-
-All components are modular and easy to customize:
-
-- Update colors in `globals.css`
-- Modify data in `public/data/images.json`
-- Adjust component styles individually
-- Change fonts in `layout.js`
-- Update SEO metadata in page files
-- Configure authentication in `src/app/lib/auth.js`
-
-## 🐛 Troubleshooting
-
-### Images not loading in production
-
-If images aren't loading on your deployed site:
-
-1. Verify `NEXT_PUBLIC_BASE_URL` is set correctly in Vercel environment variables
-2. Check that `public/data/images.json` exists and is accessible
-3. Ensure the domain in `.env` matches your production URL
-4. Redeploy after changing environment variables
-
-### Authentication issues
-
-1. Verify all `BETTER_AUTH_*` environment variables are set
-2. Check MongoDB connection string is correct
-3. Ensure OAuth credentials are configured for production domain
-4. Clear browser cookies and try again
-
-## 🚀 Deployment Checklist
-
-Before deploying to production:
-
-1. **Environment Variables** ⚠️ CRITICAL
-   - Set `NEXT_PUBLIC_BASE_URL` to your production domain
-   - Set `BETTER_AUTH_URL` and `NEXT_PUBLIC_BETTER_AUTH_URL` to production domain
-   - Configure `MONGODB_URI` with your database connection
-   - Add OAuth credentials if using Google sign-in
-   - Generate a secure `BETTER_AUTH_SECRET`
-
-2. **Create Required Images**
-   - `/public/og-image.jpg` (1200x630px)
-   - `/public/og-photos.jpg` (1200x630px)
-   - `/public/icon-192.png` (192x192px)
-   - `/public/icon-512.png` (512x512px)
-
-3. **Update Configuration**
-   - Replace domain URLs in metadata files
-   - Add Google/Yandex verification codes in `layout.js`
-   - Update social media links in Footer component
-
-4. **Submit to Search Engines**
-   - Google Search Console
-   - Bing Webmaster Tools
-   - Submit sitemap at `/sitemap.xml`
-
-5. **Set Up Analytics**
-   - Google Analytics
-   - Vercel Analytics
-
-### Vercel Deployment
-
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel
-
-# Set environment variables in Vercel dashboard
-# Then redeploy
-vercel --prod
-```
-
-**Important:** After setting environment variables in Vercel, you must redeploy for changes to take effect.
-
-## 📊 Performance
-
-- ⚡ Lighthouse Score: 95+ (Performance)
-- 🎯 Core Web Vitals: Optimized
-- 📱 Mobile-First: Fully responsive
-- ♿ Accessibility: WCAG 2.1 AA compliant
-
-## 📄 License
-
-This is a design showcase project. Feel free to use and modify as needed.
+- [Next.js](https://nextjs.org/) - React framework
+- [Better-Auth](https://better-auth.com/) - Authentication library
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS
+- [Framer Motion](https://www.framer.com/motion/) - Animation library
+- [Lucide](https://lucide.dev/) - Icon library
+- [Vercel](https://vercel.com/) - Deployment platform
 
 ---
 
-**Live Demo:** [https://pixgen-by-marufbillah.vercel.app](https://pixgen-by-marufbillah.vercel.app)
-
-**Note:** This is a full-stack application with authentication, database integration, and dynamic data fetching. All user interactions are functional.
-
-**Documentation:**
-- [SEO Implementation Guide](./SEO_IMPLEMENTATION.md)
-- [Project Overview](./PROJECT_OVERVIEW.md) (if available)
-
+<div align="center">
+  <p>Made with ❤️ by Maruf Billah</p>
+  <p>⭐ Star this repo if you find it helpful!</p>
+</div>
