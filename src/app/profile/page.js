@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { User, Mail, Image as ImageIcon } from "lucide-react";
+import Image from "next/image";
+import { Image as ImageIcon } from "lucide-react";
 import { useSession } from "../../contexts/SessionContext";
+import { authClient } from "@/app/lib/auth-client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import InputField from "@/components/InputField";
@@ -12,24 +14,18 @@ import SectionHeader from "@/components/SectionHeader";
 
 export default function Profile() {
   const router = useRouter();
-  const { session, isPending } = useSession();
+  const { session, isPending, refreshSession } = useSession();
   const [isEditing, setIsEditing] = useState(false);
-  const [userData, setUserData] = useState({
-    name: "",
-    email: "",
-    imageUrl: "",
-  });
+  const [isSaving, setIsSaving] = useState(false);
 
-  // Update userData when session loads
-  useEffect(() => {
-    if (session?.user) {
-      setUserData({
-        name: session.user.name || "",
-        email: session.user.email || "",
-        imageUrl: session.user.image || "",
-      });
-    }
-  }, [session]);
+  // Only store edited values in state, derive display values from session
+  const [editedName, setEditedName] = useState("");
+  const [editedImageUrl, setEditedImageUrl] = useState("");
+
+  // Derive current display values
+  const displayName = session?.user?.name || "";
+  const displayEmail = session?.user?.email || "";
+  const displayImageUrl = session?.user?.image || "";
 
   // Redirect to signin if not authenticated
   useEffect(() => {
@@ -56,14 +52,40 @@ export default function Profile() {
     return null;
   }
 
+  const handleEditClick = () => {
+    // Initialize edit state with current values
+    setEditedName(displayName);
+    setEditedImageUrl(displayImageUrl);
+    setIsEditing(true);
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+    setEditedName("");
+    setEditedImageUrl("");
+  };
+
   const handleSaveChanges = async () => {
+    setIsSaving(true);
     try {
-      // Here you would typically update the user profile via API
-      // For now, we'll just show a success message
+      // Update user profile using Better-Auth
+      await authClient.updateUser({
+        name: editedName,
+        image: editedImageUrl,
+      });
+
+      // Refresh the session to get updated data
+      await refreshSession();
+
       toast.success("Profile updated successfully!");
       setIsEditing(false);
+      setEditedName("");
+      setEditedImageUrl("");
     } catch (error) {
-      toast.error("Failed to update profile");
+      console.error("Profile update error:", error);
+      toast.error("Failed to update profile. Please try again.");
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -96,16 +118,20 @@ export default function Profile() {
             <div className="flex flex-col items-center text-center">
               {/* Avatar */}
               <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-linear-to-br from-violet-600 to-cyan-500 p-1 mb-4 sm:mb-6">
-                {userData.imageUrl ? (
-                  <img
-                    src={userData.imageUrl}
-                    alt={userData.name}
-                    className="w-full h-full rounded-full object-cover"
-                  />
+                {displayImageUrl ? (
+                  <div className="w-full h-full rounded-full overflow-hidden relative">
+                    <Image
+                      src={displayImageUrl}
+                      alt={displayName}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 80px, 96px"
+                    />
+                  </div>
                 ) : (
                   <div className="w-full h-full rounded-full bg-[#0f1318] flex items-center justify-center">
                     <span className="text-2xl sm:text-3xl font-bold text-white font-syne">
-                      {getInitials(userData.name)}
+                      {getInitials(displayName)}
                     </span>
                   </div>
                 )}
@@ -113,17 +139,17 @@ export default function Profile() {
 
               {/* Name */}
               <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2 font-syne">
-                {userData.name}
+                {displayName}
               </h1>
 
               {/* Email */}
               <p className="text-sm sm:text-base text-slate-400 mb-4 sm:mb-6">
-                {userData.email}
+                {displayEmail}
               </p>
 
               {/* Edit Button */}
               <GhostButton
-                onClick={() => setIsEditing(true)}
+                onClick={handleEditClick}
                 className="px-4 sm:px-6 py-2 text-xs sm:text-sm"
               >
                 Edit Profile
@@ -139,50 +165,37 @@ export default function Profile() {
               <InputField
                 label="Full Name"
                 type="text"
-                value={userData.name}
-                onChange={(e) =>
-                  setUserData({ ...userData, name: e.target.value })
-                }
+                value={editedName}
+                onChange={(e) => setEditedName(e.target.value)}
               />
 
               <InputField
                 label="Email"
                 type="email"
-                value={userData.email}
-                onChange={(e) =>
-                  setUserData({ ...userData, email: e.target.value })
-                }
+                value={displayEmail}
+                disabled
+                onChange={() => {}}
               />
 
               <InputField
                 label="Profile Image URL"
                 type="url"
                 placeholder="https://example.com/avatar.jpg"
-                value={userData.imageUrl}
-                onChange={(e) =>
-                  setUserData({ ...userData, imageUrl: e.target.value })
-                }
+                value={editedImageUrl}
+                onChange={(e) => setEditedImageUrl(e.target.value)}
               />
 
               <div className="flex gap-4 mt-2">
                 <GradientButton
                   onClick={handleSaveChanges}
+                  disabled={isSaving}
                   className="flex-1"
                 >
-                  Save Changes
+                  {isSaving ? "Saving..." : "Save Changes"}
                 </GradientButton>
                 <GhostButton
-                  onClick={() => {
-                    setIsEditing(false);
-                    // Reset userData to original session data
-                    if (session?.user) {
-                      setUserData({
-                        name: session.user.name || "",
-                        email: session.user.email || "",
-                        imageUrl: session.user.image || "",
-                      });
-                    }
-                  }}
+                  onClick={handleCancelEdit}
+                  disabled={isSaving}
                   className="flex-1"
                 >
                   Cancel

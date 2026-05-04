@@ -10,11 +10,11 @@ const SessionContext = createContext({
   session: null,
   isPending: true,
   signOut: async () => {},
-  refreshSession: () => {},
+  refreshSession: async () => {},
 });
 
 export function SessionProvider({ children }) {
-  const { data: session, isPending } = useBetterAuthSession();
+  const { data: session, isPending, refetch } = useBetterAuthSession();
 
   const signOut = async () => {
     try {
@@ -26,7 +26,15 @@ export function SessionProvider({ children }) {
     }
   };
 
-  const refreshSession = () => {};
+  const refreshSession = async () => {
+    try {
+      await refetch();
+      return { success: true };
+    } catch (error) {
+      console.error("Session refresh error:", error);
+      return { success: false, error };
+    }
+  };
 
   const value = {
     session,

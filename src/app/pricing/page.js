@@ -192,7 +192,7 @@ export default function Pricing() {
                   </div>
 
                   {/* Features */}
-                  <div className="mb-8 flex-grow">
+                  <div className="mb-8 grow">
                     <ul className="space-y-3">
                       {plan.features.map((feature, index) => (
                         <li key={index} className="flex items-start gap-3">
