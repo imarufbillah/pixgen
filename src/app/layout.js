@@ -5,6 +5,8 @@ import { Syne, DM_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Breadcrumb from "@/components/Breadcrumb";
+import BackToTop from "@/components/BackToTop";
 import { Toaster } from "sonner";
 import { SessionProvider } from "@/contexts/SessionContext";
 
@@ -129,8 +131,10 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col bg-[#080b10] text-slate-100">
         <SessionProvider>
           <Navbar />
+          <Breadcrumb />
           <main className="flex-1">{children}</main>
           <Footer />
+          <BackToTop />
           <Toaster
             theme="dark"
             position="top-right"

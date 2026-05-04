@@ -72,6 +72,7 @@ export default async function PhotoDetails({ params }) {
   // Find the image based on the dynamic route parameter
   const imageId = String(resolvedParams.id);
   const image = await fetchImageById(imageId);
+  const allImages = await fetchImages(); // For keyboard navigation
 
   // If image not found, show 404 or redirect
   if (!image) {
@@ -152,7 +153,7 @@ export default async function PhotoDetails({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <PhotoDetailClient image={image} />
+      <PhotoDetailClient image={image} allImages={allImages} />
     </>
   );
 }

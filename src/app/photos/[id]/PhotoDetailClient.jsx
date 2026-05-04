@@ -2,12 +2,101 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Heart, Download, Cpu, Maximize2, Calendar } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import {
+  Heart,
+  Download,
+  Cpu,
+  Maximize2,
+  Calendar,
+  Copy,
+  Check,
+  Share2,
+} from "lucide-react";
+import { FaTwitter, FaFacebook, FaLinkedin } from "react-icons/fa";
 import GradientButton from "@/components/GradientButton";
 import GhostButton from "@/components/GhostButton";
 import MetaItem from "@/components/MetaItem";
+import { toast } from "sonner";
 
-export default function PhotoDetailClient({ image }) {
+export default function PhotoDetailClient({ image, allImages }) {
+  const router = useRouter();
+  const [copied, setCopied] = useState(false);
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      // ESC - Go back
+      if (e.key === "Escape") {
+        router.back();
+      }
+
+      // Arrow keys - Navigate between images
+      if (allImages && allImages.length > 0) {
+        const currentIndex = allImages.findIndex((img) => img.id === image.id);
+
+        if (e.key === "ArrowLeft" && currentIndex > 0) {
+          // Previous image
+          router.push(`/photos/${allImages[currentIndex - 1].id}`);
+        } else if (
+          e.key === "ArrowRight" &&
+          currentIndex < allImages.length - 1
+        ) {
+          // Next image
+          router.push(`/photos/${allImages[currentIndex + 1].id}`);
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+  }, [image.id, allImages, router]);
+
+  const handleCopyPrompt = async () => {
+    try {
+      await navigator.clipboard.writeText(image.prompt);
+      setCopied(true);
+      toast.success("Prompt copied to clipboard!");
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      toast.error("Failed to copy prompt");
+    }
+  };
+
+  const handleShare = (platform) => {
+    const url = window.location.href;
+    const text = `Check out this amazing AI-generated art: ${image.title}`;
+
+    const shareUrls = {
+      twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
+    };
+
+    if (shareUrls[platform]) {
+      window.open(shareUrls[platform], "_blank", "width=600,height=400");
+    }
+  };
+
+  const handleNativeShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: image.title,
+          text: `Check out this amazing AI-generated art: ${image.title}`,
+          url: window.location.href,
+        });
+        toast.success("Shared successfully!");
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          toast.error("Failed to share");
+        }
+      }
+    } else {
+      toast.info("Share via social media buttons below");
+    }
+  };
   // Animation variants with smoother settings
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -131,10 +220,30 @@ export default function PhotoDetailClient({ image }) {
               className="flex flex-col gap-3"
               variants={fadeInVariants}
             >
-              <h2 className="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-2">
-                <span className="w-1 h-4 bg-violet-500 rounded-full" />
-                Prompt
-              </h2>
+              <div className="flex items-center justify-between">
+                <h2 className="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-2">
+                  <span className="w-1 h-4 bg-violet-500 rounded-full" />
+                  Prompt
+                </h2>
+                <motion.button
+                  onClick={handleCopyPrompt}
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-violet-600/20 text-violet-400 hover:bg-violet-600/30 border border-violet-500/30 text-xs font-medium transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {copied ? (
+                    <>
+                      <Check size={14} />
+                      <span>Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy size={14} />
+                      <span>Copy</span>
+                    </>
+                  )}
+                </motion.button>
+              </div>
               <motion.div
                 className="p-3 sm:p-4 bg-[#0f1318] border border-white/10 rounded-lg group cursor-default"
                 whileHover={{
@@ -214,17 +323,65 @@ export default function PhotoDetailClient({ image }) {
 
             {/* Action Buttons */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-2 sm:mt-4"
+              className="flex flex-col gap-3 sm:gap-4 mt-2 sm:mt-4"
               variants={fadeInVariants}
             >
-              <GhostButton className="flex-1">
-                <Heart size={18} />
-                <span>Like</span>
-              </GhostButton>
-              <GradientButton className="flex-1">
-                <Download size={18} />
-                <span>Download</span>
-              </GradientButton>
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <GhostButton className="flex-1">
+                  <Heart size={18} />
+                  <span>Like</span>
+                </GhostButton>
+                <GradientButton className="flex-1">
+                  <Download size={18} />
+                  <span>Download</span>
+                </GradientButton>
+              </div>
+
+              {/* Share Section */}
+              <div className="flex flex-col gap-3">
+                <h3 className="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-2">
+                  <Share2 size={14} className="text-cyan-400" />
+                  Share
+                </h3>
+                <div className="flex gap-2">
+                  <motion.button
+                    onClick={handleNativeShare}
+                    className="flex-1 px-4 py-2.5 rounded-lg bg-[#0f1318] border border-white/10 hover:border-violet-500/50 text-slate-300 hover:text-white transition-all text-sm font-medium flex items-center justify-center gap-2"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Share2 size={16} />
+                    <span>Share</span>
+                  </motion.button>
+                  <motion.button
+                    onClick={() => handleShare("twitter")}
+                    className="px-4 py-2.5 rounded-lg bg-[#1DA1F2]/20 border border-[#1DA1F2]/30 hover:bg-[#1DA1F2]/30 text-[#1DA1F2] transition-all"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    title="Share on Twitter"
+                  >
+                    <FaTwitter size={18} />
+                  </motion.button>
+                  <motion.button
+                    onClick={() => handleShare("facebook")}
+                    className="px-4 py-2.5 rounded-lg bg-[#1877F2]/20 border border-[#1877F2]/30 hover:bg-[#1877F2]/30 text-[#1877F2] transition-all"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    title="Share on Facebook"
+                  >
+                    <FaFacebook size={18} />
+                  </motion.button>
+                  <motion.button
+                    onClick={() => handleShare("linkedin")}
+                    className="px-4 py-2.5 rounded-lg bg-[#0A66C2]/20 border border-[#0A66C2]/30 hover:bg-[#0A66C2]/30 text-[#0A66C2] transition-all"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    title="Share on LinkedIn"
+                  >
+                    <FaLinkedin size={18} />
+                  </motion.button>
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>

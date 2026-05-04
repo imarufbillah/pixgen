@@ -26,6 +26,7 @@ export default function Navbar() {
     { href: "/", label: "Home" },
     { href: "/photos", label: "All Photos" },
     { href: "/pricing", label: "Pricing" },
+    { href: "/about", label: "About" },
     ...(session ? [{ href: "/profile", label: "Profile" }] : []),
   ];
 
