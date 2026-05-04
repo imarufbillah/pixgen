@@ -151,7 +151,7 @@ export default function Pricing() {
               return (
                 <div
                   key={plan.name}
-                  className={`relative p-6 sm:p-8 rounded-2xl border transition-all duration-300 hover:scale-105 ${
+                  className={`relative p-6 sm:p-8 rounded-2xl border transition-all duration-300 hover:scale-105 flex flex-col ${
                     plan.popular
                       ? "border-violet-500/50 bg-linear-to-b from-violet-900/20 to-[#0f1318] shadow-2xl shadow-violet-500/20"
                       : "border-white/10 bg-[#0f1318] hover:border-white/20"
@@ -192,7 +192,7 @@ export default function Pricing() {
                   </div>
 
                   {/* Features */}
-                  <div className="mb-8">
+                  <div className="mb-8 flex-grow">
                     <ul className="space-y-3">
                       {plan.features.map((feature, index) => (
                         <li key={index} className="flex items-start gap-3">
@@ -213,7 +213,7 @@ export default function Pricing() {
                   </div>
 
                   {/* CTA Button */}
-                  <div className="mt-auto">
+                  <div className="mt-auto pt-4">
                     {plan.buttonVariant === "gradient" ? (
                       <GradientButton className="w-full py-3 text-base font-semibold">
                         {plan.buttonText}

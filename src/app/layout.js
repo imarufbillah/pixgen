@@ -1,3 +1,6 @@
+import dns from "node:dns";
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+
 import { Syne, DM_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -103,7 +106,8 @@ export default function RootLayout({ children }) {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: "https://pixgen-by-marufbillah.vercel.app/photos?q={search_term_string}",
+        urlTemplate:
+          "https://pixgen-by-marufbillah.vercel.app/photos?q={search_term_string}",
       },
       "query-input": "required name=search_term_string",
     },
@@ -127,14 +131,14 @@ export default function RootLayout({ children }) {
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
-          <Toaster 
-            theme="dark" 
+          <Toaster
+            theme="dark"
             position="top-right"
             toastOptions={{
               style: {
-                background: '#0f1318',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                color: '#f1f5f9',
+                background: "#0f1318",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                color: "#f1f5f9",
               },
             }}
           />
